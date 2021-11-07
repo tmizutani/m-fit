@@ -1,0 +1,403 @@
+\subsection{Detecção de Bordas \label{deteccao_de_bordas}}
+
+\hspace*{1.25cm}Detecção de Bordas é uma técnica para localizar os
+pontos e linhas que dividem regiões distintas de uma determinada
+imagem. A detecção das bordas pode ser feita através do uso de
+diversos operadores. Como visto em \cite{GIOVANE_2002},
+computacionalmente, define-se uma borda como sendo uma região que
+possui um gradiente de alta magnitude. Por este fato, o operador de
+Sobel é uma interessante forma de se realizar a detecção de bordas,
+visto que este operador é baseado no cálculo do gradiente e sua
+magnitude.
+
+\hspace*{0.65cm}Segundo \cite{SEARA_1998}, o cálculo do gradiente é
+dado por:
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:gradiente}
+    \nabla f =  \begin{bmatrix} Gx \\ Gy \end{bmatrix} =
+    \begin{bmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{\partial y} \end{bmatrix}
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}E sua magnitude é dada por:
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:magnitude}
+mag(\nabla f) = [ G_x^2 + G_y^2 ]^\frac{1}{2}
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde:
+
+\begin{large}
+\begin{center}
+    $G_x =  \begin{bmatrix}         1 & 2 & 1 \\
+                                    0 & 0 & 0 \\
+                                    -1 & -2 & -1
+                \end{bmatrix}
+    $ e
+    $G_y =  \begin{bmatrix}       -1 & 0 & 1 \\
+                                  -2 & 0 & 2 \\
+                                  -1 & 0 & 1
+            \end{bmatrix}
+    $
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}São operadores que aplicam o processo de convolução
+na imagem como visto no tópico anterior.
+
+\hspace*{0.65cm}Através destes cálculos é possível obter, além da
+magnitude, a direção do gradiente.
+
+\hspace*{0.65cm}Este operador realiza a detecção de bordas em duas
+etapas. Primeiramente, fará a detecção das bordas horizontais da
+imagem (Figura \ref{img_sobel} - b), utilizando a máscara $G_x$ e
+depois fará a detecção das bordas verticais (Figura \ref{img_sobel}
+- c), aplicando a máscara $G_y$. Com a união e normalização do
+resultado destes dois processos de detecção de bordas, obtém-se o
+mapa de bordas da imagem (Figura \ref{img_sobel} - c).
+
+\begin{figure}[Ht]
+\centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/borda_sobel_original.png}
+        (a)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/borda_sobel_horizontal.png}
+        (b)
+    \end{minipage}
+    \par
+    \centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/borda_sobel_vertical.png}
+        (c)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/borda_sobel_completo.png}
+        (d)
+    \end{minipage}
+    \caption{a) Imagem Original; b) Sobel Horizontal; c) Sobel Vertical; d) Sobel Completo.}
+    Fonte: Autor ``adaptado de'' OpenCV Samples.
+    \label{img_sobel}
+\end{figure}
+
+\hspace*{0.65cm}Através da aplicação deste operador, é possível
+obter uma boa detecção de bordas. Em contrapartida, este processo
+pode causar um indesejável aumento dos ruídos na imagem. Isto se
+deve ao fato de que, ao passar pelos processos de convolução e
+cálculo de magnitude do gradiente, os ruídos, assim como as bordas,
+retornam um valor de magnitude elevada, sendo necessário aplicar
+outros processos de filtragem para a redução dos mesmos
+(\cite{FELGUEIRAS_2006}).
+
+\hspace*{0.65cm}Outro método também eficiente para realizar a detecção
+de bordas de uma imagem, é a utilização do operador de Canny.
+Este operador é baseado em três critérios básicos \cite{SEARA_1998}, os quais,
+segundo Canny, qualquer filtro para detecção de bordas deve atender \cite{GIOVANE_2002}.
+São eles:
+
+\begin{enumerate}
+\item Alta razão Sinal/Ruído (SNR)
+\item Ótima localização (L)
+\item Boa resposta
+\end{enumerate}
+
+\hspace*{0.65cm}Onde SNR representa a eficiência do filtro em
+relação a falsos positivos (detecção de falsas bordas, ruídos), ou
+seja, o filtro deve detectar o máximo de bordas verdadeiras (Sinal)
+existentes na imagem. Quanto maior o SNR, melhor será a detecção.
+
+\hspace*{0.65cm}O critério de localização, como o nome já diz, está
+ligado à localização real da borda na imagem e àquela apontada pelo
+filtro. Quanto menor a distância entre a borda detectada e a borda
+real, melhor será o filtro.
+
+\hspace*{0.65cm}O último dos critérios corresponde à quantidade de
+respostas geradas pelo filtro em relação a uma única borda. Para
+cada borda existente na imagem, o filtro deve apontar somente uma
+resposta.
+
+\hspace*{0.65cm}Tais conceitos podem ser vistos em
+\cite{GIOVANE_2004} e \cite{GIOVANE_2002}.
+
+\hspace*{0.65cm}Para atender a estes critérios, são adotados, além
+de processos de convolução (Seção \ref{filtragem_espacial}),
+processos de Supressão não Máxima e Histerese.
+
+\hspace*{0.65cm}A Supressão não Máxima consiste na eliminação dos
+pixels da região perpendicular à direção da borda que não possuírem
+magnitude máxima \cite{GIOVANE_2004}, onde a magnitude dos pixels é
+dada por:
+
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:magnitude_canny}
+M(x,y) = [ I_x(x,y)^2 + I_y(x,y)^2 ]^\frac{1}{2}
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde $I_x$ é a imagem convoluída na direção X e $I_y$ é a imagem convoluída na
+direção Y.
+
+\hspace*{0.65cm}Como visto no início desta seção, as bordas são
+representadas por pixels que possuem gradiente de alta magnitude.
+Devido à ruídos presentes na imagem, após os processos de
+convolução, podem haver diversos pixels representando um único ponto
+de borda verdadeiro. Porém, aquele que possuir o gradiente com maior
+magnitude é o candidato mais forte para representar a borda
+(\cite{GIOVANE_2002}). Através do processo de supressão não máxima,
+os pixels de magnitude não máxima são eliminados, restando somente 1
+pixel representando 1 ponto de borda, o que melhora a performance do
+filtro e atende ao terceiro critério citado anteriormente.
+
+\hspace*{0.65cm}Exemplos e melhores explicações da aplicação deste
+processo podem ser encontradas em \cite{GIOVANE_2002}.
+
+\hspace*{0.65cm}Para atender ao critério da localização, é utilizado
+o processo de histerese, ou limiarização adaptativa
+\cite{GIOVANE_2004}. Este processo consiste em aplicar duas vezes o
+processo de limiarização em uma mesma imagem, com a utilização de
+dois limiares, $T_{1}$ e $T_{2}$, onde $T_{1} = 2T_{2}$ ou $T_{1} =
+3T_{2}$. A limiarização se dá da seguinte forma:
+
+\begin{enumerate}
+\item Verifica-se se a luminância do pixel é maior que $T_{1}$, se for, ele é automaticamente
+aceito como borda;
+\item Se a luminância do pixel for menor que $T_{2}$, este pixel será automaticamente
+rejeitado;
+\item Se o valor da luminância estiver entre os dois limiares, este será aceito somente se
+os seus pixels imediatamente vizinhos, forem pixels com alto valor de luminância.
+\end{enumerate}
+
+\hspace*{0.65cm}Com a aplicação destes operadores é possível obter o
+Mapa de Bordas de uma imagem, que é a imagem original filtrada, onde
+os pixels pertencentes a uma borda, são destacados (representados
+por pixels brancos) e aqueles que não forem pertencentes a uma borda
+são ignorados (representados por pixels pretos). Um exemplo de mapa
+de bordas pode ser visto na Figura \ref{img:mapa_de_bordas}.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/mapa_de_bordas.png}
+ \caption{Mapa de bordas gerado com operador de Canny. }
+ Fonte: Autor
+ \label{img:mapa_de_bordas}
+\end{figure}
+
+\hspace*{0.65cm}Neste trabalho, serão utilizadas técnicas de
+detecção de bordas para fazer o realce das bordas do ritmo visual
+que possivelmente representem uma transição.
+
+\hspace*{0.65cm}Melhores abordagens sobre estes métodos podem ser
+encontradas
+em \cite{SANTOS_2005}, \cite{MADRUGA_2005}, \cite{BOTELHO_2007}, \\
+\cite{FELGUEIRAS_2006}, \cite{STIVANELLO_2005} e \\
+\cite{GONZALEZ_2002}.
+
+\section{Processamento de Médio Nível \label{medio_nivel}}
+\subsection{Morfologia Matemática \label{morfologia_matematica}}
+
+\hspace*{1.25cm}Morfologia Matemática é basicamente o estudo das
+formas de objetos através da aplicação de determinadas operações
+matemáticas. Na área de processamento de imagens a morfologia pode
+ser aplicada em uma imagem com o objetivo de realizar o seu
+reconhecimento, a eliminação de ruídos, detecção de bordas, através
+do uso de algumas operações morfológicas. Segundo
+\cite{NOGUEIRA_2002}, a base da morfologia matemática é composta por
+dois operadores básicos, a erosão e a dilatação. A erosão consiste
+na retirada de pontos indesejáveis da imagem, enquanto a dilatação é
+a propagação de um determinado ponto para áreas ao seu redor.
+
+\hspace*{1.25cm}Neste trabalho, a morfologia matemática é utilizada para
+a aplicação de efeitos como erosão e dilatação no vídeo em edição no M-FIT.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/morfologia_elementos_estruturantes.png}
+ \caption{Elemento estruturante: a) Cruz; b) Quadrado; c) Hexágono. }
+ Fonte: \cite{NOGUEIRA_2002}, p.79
+ \label{img:morfologia_elementos_estruturantes}
+\end{figure}
+
+\hspace*{0.65cm}Ambas as operações são sempre baseadas em um
+elemento estruturante que é um conjunto pequeno definido e conhecido
+(forma, tamanho) que é sempre comparado a um conjunto desconhecido
+da imagem. O elemento estruturante pode ser de vários tipos conforme
+observado na Figura \ref{img:morfologia_elementos_estruturantes}. A
+boa escolha de um elemento estruturante está diretamente ligada à
+qualidade dos resultados das operações. Na Figura
+\ref{img_morfologia_erosao} - b, pode ser observada a aplicação de
+uma erosão em uma imagem:
+
+\begin{figure}[h|top]
+\centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/morfologia_original.png}
+        (a)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/morfologia_erosao.png}
+        (b)
+    \end{minipage}
+    \caption{a) Imagem Original; b) Imagem Erodida}
+    Fonte: Autor ``adaptado de'' Batman - O Cavaleiro das Trevas.
+    \label{img_morfologia_erosao}
+\end{figure}
+
+\hspace*{0.65cm}Segundo \cite{NOGUEIRA_2002}, a erosão de um
+elemento é dada por:
+
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:erosao}
+ [ \varepsilon_B(f)](x)  = \min{b \in B} f(x + b) - B(b)
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde $f$ é a região da imagem a ser erodida e $B$ é
+o elemento estruturante.
+
+\hspace*{0.65cm}Como é possível observar na Figura
+\ref{img_morfologia_erosao} - b, uma imagem erodida resulta em uma
+imagem com seus pontos escuros expandidos, enquanto os claros são
+diminuídos em relação à imagem original.
+
+\begin{figure}[ht]
+\centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/morfologia_original.png}
+        (a)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/morfologia_dilatacao.png}
+        (b)
+    \end{minipage}
+    \caption{a) Imagem Original; b) Imagem Dilatada.}
+    Fonte: Autor``adaptado de'' Batman - O Cavaleiro das Trevas.
+    \label{img_morfologia_dilatacao}
+\end{figure}
+
+\hspace*{0.65cm}A dilatação, segundo \cite{NOGUEIRA_2002}, é dada
+por:
+
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:dilatacao} [ \varepsilon_B(f)](x)  = \max{b \in B} f(x +
+b)
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde $f$ é a região da imagem a ser dilatada e $B$ é
+o elemento estruturante.
+
+\hspace*{0.65cm}Como é possível observar na Figura
+\ref{img_morfologia_dilatacao} - b, ao contrário da imagem erodida,
+uma imagem dilatada tem seus pontos claros expandidos, enquanto os
+escuros são diminuídos em relação à imagem original.
+
+\hspace*{0.65cm}Neste trabalho, a Morfologia Matemática será
+utilizada para demonstrar a aplicação de efeitos visuais no vídeo.
+
+\subsection{Segmentação de Imagens \label{segmentacao_de_imagens}}
+
+\hspace*{1.25cm}Em visão computacional, segmentação é o processo de
+dividir uma imagem em múltiplas regiões, com a intenção de
+subdividir a imagem em areas de interesse, ou simplesmente
+modificá-las, ambos a fim de facilitar uma análise posterior. Em
+imagens monocromáticas algoritmos de segmentação são baseados em uma
+das propriedades básicas de valores de níveis de cinza:
+descontinuidade (detecção de bordas) e similaridade (agrupamento de
+regiões homogêneas).
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.65\linewidth]{imagens/seg_histograma.png}
+ \caption{Exemplo de limiar com histograma.}
+ \label{img_seg_histograma} Fonte: Autor.
+\end{figure}
+
+\hspace*{0.65cm}Na descontinuidade, o objetivo é particionar a
+imagem tendo como regra mudanças bruscas nas escalas de cinza. A
+similaridade baseia-se na limiarização (\cite{BASTOS_2006}. A
+limiarização ou binarização de uma imagem é dada a partir do nível
+de cinza de seus pixels. Tal processo é dado pela definição de um
+limiar $T$ no histograma da imagem e comparação dos níveis de tom de
+cinza dos pixels com o limiar $T$. Valores que forem menores que o
+limiar, têm seus valores de níveis de cinza aproximados para $255$,
+tornando-se brancos, e aqueles que tiverem níveis de cinza maiores
+que o limiar, têm seus valores em níveis de cinza aproximados para
+0, tornando-se pretos.
+
+\hspace*{0.65cm}A Figura \ref{img_seg_histograma} mostra um exemplo
+de histograma com limiar definido.
+
+\hspace*{0.65cm}Como pode ser observado nos exemplos das Figuras
+\ref{img_limiar} - b, \ref{img_limiar} - c e \ref{img_limiar} - d
+dependendo do limiar escolhido o resultado se altera. Quanto menor o
+valor do limiar mais pixels terão seus níveis de cinza aproximados
+de 255, deixando a imagem com mais pontos brancos do que pretos. A
+recíproca também é verdadeira.
+
+\begin{figure}[ht] \centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/seg_limiar_original.png}
+        (a)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/seg_limiar_50.png}
+        (b)
+    \end{minipage}
+    \par
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/seg_limiar_100.png}
+        (c)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/seg_limiar_150.png}
+        (d)
+    \end{minipage}
+    \caption{a) Figura original; b) Limiar 150; c) Limiar 100; d) Limiar 50}
+    Fonte: Autor ``adaptado de'' OpenCV Samples.
+    \label{img_limiar}
+\end{figure}
+
+\hspace*{0.65cm}Existem diversas formas de se estimar o limiar, os
+mais conhecidos são: \\limiar iterativo \cite{YANG_2006}, por
+entropia não-extensiva \cite{RODRIGUEZ} e limiar adaptativo
+\cite{ILYA_2001}.
+
+\hspace*{0.65cm}Neste trabalho, técnicas de segmentação de imagens serão
+utilizadas para identificar a área de interesse em vídeos que estejam no formato
+\textit{widescreen}, ou seja, para realizar a extração das tarjas pretas, pois estas
+podem invalidar os resultados obtidos.

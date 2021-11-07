@@ -1,0 +1,135 @@
+\chapter{REVISÃO BIBLIOGRÁFICA \label{revisao}}
+
+\hspace*{1.25cm}Neste Capítulo, serão definidos os principais
+conceitos para o entendimento de todo o projeto e a metodologia do
+sistema proposto.
+
+\section{Vídeo \label{video}}
+
+\hspace*{1.25cm}Um vídeo é uma sequência de várias imagens (as quais
+são chamadas de \textit{frames}) que são apresentadas de forma
+sequencial.
+
+\hspace*{0.65cm}Estes vídeos comumente são agrupados com outros
+vídeos, assim sendo chamados de tomadas, as quais, quando agrupadas,
+formam uma cena. Por fim, estas cenas formam um vídeo completo, como
+pode ser visto na figura \ref{img:video}.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/video.png}
+ \caption{Definição de um Vídeo}
+ Fonte: Autor ``adaptado de '' \cite{PARMANI_2006}.
+ \label{img:video}
+\end{figure}
+
+\section{Edição de Vídeo \label{edicao_de_video}}
+
+\hspace*{1.25cm}A edição de vídeos consiste em um conjunto de
+operações que modificam o conteúdo original de um vídeo. Tais
+operações podem consistir desde a segmentação do vídeo para futuras
+modificações de indexação ou armazenamento, até a aplicação de
+efeitos visuais, como por exemplo, uma mudança de cores, o
+nivelamento da luminosidade entre \textit{frames} de uma tomada, eliminação
+de ruídos, equalização de som com imagem, entre outros, os quais são
+intensamente utilizados no setor cinematográfico, de pesquisa e
+entretenimento.
+
+\hspace*{1.25cm}
+
+\hspace*{0.65cm}É comum organizar a edição de vídeos através de
+tomadas, as quais são interligadas por transições. Portanto, é
+importante que seja feita a detecção destas transições antes da
+edição do vídeo para que um determinado efeito aplicado, ou qualquer
+outra operação de edição, possa ser delimitado a tomadas específicas
+e não para o vídeo todo.
+
+\hspace*{0.65cm}Existem diversos tipos de transições. Dentre elas, as principais são
+o \textit{fade-in}, \textit{fade-out}, \textit{dissolve} e corte. A seguir, descrevemos cada uma delas e mais tarde,
+apresentaremos técnicas para sua detecção.
+
+\subsection{Fade-in \label{ed_fadein}}
+
+\hspace*{1.25cm}O \textit{fade-in} é uma transição gradativa entre um \textit{frame}
+escuro e o primeiro \textit{frame} mais claro de uma determinada tomada. Este tipo de
+transição geralmente é utilizado no início do vídeo ou no início de
+um bloco de tomadas.
+
+\hspace*{0.65cm}Pode-se visualizar a ocorrência de um \textit{Fade-in} na
+Figura \ref{img_fadein}, aproximadamente entre os \textit{frames} $F3$ e
+$F4$.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/fadein.png}
+ \caption{Exemplo de \textit{fade-in} em uma sequência de \textit{frames}. Fi representa o i-ésimo \textit{frame}.}
+ Fonte: Autor ``adaptado de '' \cite{GUIMARAES_2002_2}, p.3.
+ \label{img_fadein}
+\end{figure}
+
+\hspace*{0.65cm}Uma boa abordagem sobre o \textit{fade-in} pode ser
+encontrada em \\ \cite{GUIMARAES_2004}
+
+
+\subsection{Fade-out \label{ed_fadeout}}
+
+\hspace*{1.25cm}O \textit{fade-out} é como o \textit{fade-in}, porém possui um efeito
+contrário, onde a transição ocorre da parte mais clara de um
+determinado \textit{frame} até que este \textit{frame} torne-se completamente preto.
+
+\hspace*{0.65cm}Um exemplo desta transição pode ser observado na
+Figura \ref{img_fadeout}, em torno dos \textit{frames} $F5$ e $F6$.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/fadeout.png}
+ \caption{Exemplo de \textit{Fade-out} em uma seqüência de \textit{frames}. Fi representa o i-ésimo \textit{frame}.}
+ Fonte: \cite{GUIMARAES_2002_2}, p.3.
+ \label{img_fadeout}
+\end{figure}
+
+\hspace*{0.65cm}Pode-se encontrar mais sobre \textit{fade-out} em \cite{GUIMARAES_2004}
+
+\subsection{Corte \label{ed_corte}}
+
+\hspace*{1.25cm}Cortes são transições bruscas e secas entre tomadas,
+onde o último \textit{frame} de uma determinada tomada é concatenado ao
+primeiro \textit{frame} da tomada seguinte diretamente. Este tipo de
+transição é utilizada quando é necessária uma mudança rápida de
+tomada.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/corte.png}
+ \caption{Exemplo de corte em uma seqüência de \textit{frames}. Fi representa o i-ésimo \textit{frame}.}
+ Fonte: \cite{GUIMARAES_2002_2}, p.3.
+ \label{img_corte}
+\end{figure}
+
+\hspace*{0.65cm}Nota-se claramente que no exemplo da Figura
+\ref{img_corte}, a transição ocorre entre o \textit{frame} $F3$ e o \textit{frame}
+$F4$. Uma boa referência para as transições do tipo corte pode ser
+vista em \cite{YU_2001}.
+
+\subsection{Dissolve \label{ed_Dissolve}}
+
+\hspace*{1.25cm}O \textit{dissolve} é uma transição onde a primeira tomada dá
+lugar a uma segunda tomada gradualmente, havendo uma sobreposição
+dos primeiros \textit{frames} da próxima tomada sobre os últimos da tomada
+anterior. Geralmente, este tipo de transição é usado na mudança de
+paisagens. Podemos visualizar este efeito na Figura
+\ref{img_dissolve}, ocorrendo aproximadamente do \textit{frame} $F2$ ao \textit{frame}
+$F5$.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/dissolve.png}
+ \caption{Exemplo de \textit{Dissolve} em seqüência de \textit{frames}. Fi representa o i-ésimo \textit{frame}.}
+ Fonte: \cite{GUIMARAES_2002_2}, p.3.
+ \label{img_dissolve}
+\end{figure}
+
+\hspace*{0.65cm}Pode-se observar na Figura \ref{img_dissolve} a
+primeira tomada(F1) dando lugar gradativamente para a segunda tomada até
+que não haja mais sobreposição de imagens(F6). Uma boa abordagem sobre a
+definição do \textit{dissolve} pode ser encontrada em \cite{FERNANDO_1999}.

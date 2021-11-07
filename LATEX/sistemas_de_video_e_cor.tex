@@ -1,0 +1,259 @@
+\section{Sistemas de Vídeo \label{sistemas_de_video}}
+
+\hspace*{1.25cm}Os sistemas de vídeo consistem na organização em que
+uma determinada informação de vídeo é armazenada em forma digital,
+tais como AVI (\textit{Audio Video Interleave}), MPEG (\textit{Movie Pictures Experts Group}, entre outros. O MPEG
+é um padrão internacional definido pela ISO (\textit{International Organization for Standardization}) que tem como
+característica a compressão de um vídeo, onde, ao comprimir uma
+determinada amostragem de um vídeo, o mesmo é passado pelo canal
+compressor e, ao exibir esta mesma amostragem, o vídeo passa pelo
+canal expansor (Figura \ref{img_mpeg}).
+
+\hspace*{0.65cm}Por outro lado, o AVI é um padrão criado pela
+Microsoft em 1992, formato derivado do padrão RIFF (\textit{Resource
+Interchange File Format}), o qual divide os dados em blocos. Ao
+contrário dos outros padrões, o AVI não possui compressão,
+resultando em arquivos com tamanhos grandes, porém, sem perda de
+qualidade. Na Figura \ref{img_avi} observa-se que, da direita para a
+esquerda, a estrutura de dados de um arquivo AVI é formada
+primeiramente pelo cabeçalho RIFF, onde seus respectivos componentes
+são: tamanho do arquivo total, bloco de dados ou lista de bloco de
+dados. Quando o bloco de dados é definido em sub-blocos, cada parte
+é identificado pelo ID e em seguida o tamanho do sub-bloco
+correspondente.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.8\linewidth]{imagens/mpeg.png}
+ \caption{Sistema de Codificação e Decodificação de um vídeo no formato MPEG.}
+ Fonte: Autor.
+ \label{img_mpeg}
+\end{figure}
+
+\begin{figure}[H|top]
+ \centering
+ \includegraphics[width=0.8\linewidth]{imagens/avi.png}
+ \caption{Sistema de armazenamento AVI.}
+ Fonte: Autor ``adaptado de'' \cite{OPENDML_2008}, p.3.
+ \label{img_avi}
+\end{figure}
+
+\hspace*{0.65cm}Neste trabalho, serão usados somente videos AVI, por
+serem os mais populares e fáceis de encontrar exemplos para testes
+do M-FIT.
+
+\section{Sistemas de Cor \label{sistemas_de_cor}}
+
+\hspace*{1.25cm}O sistema de cor consiste nos padrões que definem as
+propriedades de uma determinada cor. Por exemplo, o branco é
+composto por todas as outras cores, onde um espectro de luz visível
+pode então assumir diversas cores (desde o violeta até o vermelho)
+em função do comprimento de onda observada na Tabela \ref{tab:onda}.
+
+\hspace*{0.65cm}Como visto em \cite{GATTASS_2006}, existem três
+características básicas de um espectro de luz são, a matriz
+(definida pelo comprimento da onda), brilho (intensidade da luz
+fonte) e saturação (predominância do branco matriz).
+
+\hspace*{0.65cm}Existem dois processos de formação de cores
+(\cite{GATTASS_2006}): aditivo e subtrativo. A formação do sistema
+de cores no processo aditivo é obtida a partir de duas fontes
+luminosas, onde, cores diferentes são projetadas em duas regiões;
+sendo assim, na intersecção entre as cores há a formação de uma nova
+cor. Por outro lado o processo subtrativo é geralmente feito com a
+utilização de slides. Um exemplo tem-se quando emite-se uma luz
+branca (que possui todos os comprimentos de onda) sobre um filtro
+verde, o qual filtra todos os comprimentos de onda deixando passar
+somente o comprimento de onda relativa à cor verde (absorção da
+cor), produzindo assim o verde. Dentro do sistema de cores, os
+padrões mais conhecidos são: RGB, CMYK, HSV, RYB, Highcolor, Imagem
+binária, SRGB, Munsell, entre outros.
+
+
+
+\begin{table}[htb] % [htb]-> here, top, botton
+   \centering   % tabela centralizada
+   \large       % tamanho da fonte
+   \setlength{\arrayrulewidth}{2\arrayrulewidth}  % espessura da  linha
+   \setlength{\belowcaptionskip}{10pt}  % espaço entre caption e tabela
+   \caption{\it Tabela do comprimento de onda de um espectro de luz.}
+   \begin{tabular}{|l|c|c|c|} % c=center, l=left, r=right
+
+        \hline Cor & Comprimento da Onda \\
+        \hline Violeta & 380-440 mm \\
+        \hline Azul & 440-490 mm \\
+        \hline Verde & 490-565 mm \\
+        \hline Amarelo & 565-590 mm \\
+        \hline Vermelho & 630-780 mm \\
+        \hline
+
+   \end{tabular}
+   \label{tab:onda}
+\end{table}
+
+\subsection{RGB \label{sc_rgb}}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.65\linewidth]{imagens/rgb.png}
+ \caption{Sistema RGB.}
+ Fonte: \cite{GATTASS_2006}, p.13.
+ \label{img_rgb}
+\end{figure}
+
+\hspace*{1.25cm}Formado pelas cores vermelha, verde e azul, o RGB (\textit{Red Green Blue}) é
+um padrão de cores utilizado em monitores/televisores, em tubos de
+raios catódicos, cristal liquido ou de plasma. Utiliza 8 bits de
+informação para representar cada canal de cor (vermelho, verde,
+azul), podendo variar de 0 a 255 para cada canal. É possível
+alcançar mais de 16 milhões de cores com suas combinações de tons.
+Algumas destas cores estão representadas na Tabela \ref{tab:rgb}:
+
+\begin{table}[htb] % [htb]-> here, top, botton
+   \centering   % tabela centralizada
+   \large       % tamanho da fonte
+   \setlength{\arrayrulewidth}{2\arrayrulewidth}  % espessura da  linha
+   \setlength{\belowcaptionskip}{10pt}  % espaço entre caption e tabela
+   \caption{\it Tabela com algumas das muitas combinações de cores possíveis com o sistema RGB.}
+   \begin{tabular}{|l|c|c|c|} % c=center, l=left, r=right
+
+        \hline Cor & R & G & B \\
+        \hline Preto & 0 & 0 &  0 \\
+        \hline Vermelho & 255 & 0 & 0 \\
+        \hline Verde & 0 & 255 & 0 \\
+        \hline Azul & 0 & 0 & 255 \\
+        \hline Branco & 255 & 255 & 255 \\
+        \hline Ciano & 0 & 255 & 255 \\
+        \hline Cinza & 190 & 190 & 190 \\
+        \hline Magenta & 255 & 0 & 255 \\
+        \hline Amarelo & 255 & 255 & 0 \\
+        \hline
+
+   \end{tabular}
+   \label{tab:rgb}
+\end{table}
+
+Na Figura \ref{img_rgb} é possível observar o seu modelo mapeado em
+um cubo.
+
+\subsection{HSV \label{sc_hsv}}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/hsv.png}
+ \caption{Representação do sistema HSV: a) A mistura de cores representada por um círculo; b) Modelo de representação do padrão HSV;}
+ Fonte: Autor ``adaptado de'' \cite{TUTIDA_1998}.
+ \label{img_hsv}
+\end{figure}
+
+\hspace*{1.25cm}Como pode ser visto em \cite{GATTASS_2006},
+o HSV (\textit{Hue, Saturation, e Value}), também conhecido como HSB
+(\textit{Hue, Saturation e Brightness}), é o sistema de cores
+mais próximo à percepção da visão humana, por esse motivo, apresenta
+maiores vantagens em relação aos demais sistemas, em aplicações de
+visão computacional.
+
+\hspace*{0.65cm}Sua representação é dada por um cone (Figura
+\ref{img_hsv} - a). A vantagem deste modelo é a capacidade de
+representar as cores do espaço HSV em um único objeto. Devido à
+natureza bidimensional das interfaces de computador, o modelo cônico
+HSV é mais adequada para selecionar as cores para computação
+gráfica.
+
+\begin{table}[htb] % [htb]-> here, top, botton
+   \centering   % tabela centralizada
+   \large       % tamanho da fonte
+   \setlength{\arrayrulewidth}{2\arrayrulewidth}  % espessura da  linha
+   \setlength{\belowcaptionskip}{10pt}  % espaço entre caption e tabela
+   \caption{\it Seleção de nível de cores (Matriz).}
+   \begin{tabular}{|l|c|c|} % c=center, l=left, r=right
+
+        \hline Ângulo & Cor  \\
+        \hline 0-60 & Vermelho  \\
+        \hline 60-120 & Amarelo  \\
+        \hline 120-180 & Verde  \\
+        \hline 180-240 & Ciano  \\
+        \hline 240-300 & Azul  \\
+        \hline 300-360 & Magenta  \\
+
+
+        \hline
+
+   \end{tabular}
+   \label{tab:hsv}
+\end{table}
+
+\hspace*{0.65cm}Este sistema é composto por 3 canais: Tonalidade (ou
+Matriz), Saturação e Valor, onde a tonalidade é a cor definida pela
+faixa de valores de 0 a 360 graus (Tabela \ref{tab:hsv}) e tem sua
+representação dada por um círculo que corta o cone transversalmente.
+A saturação varia pelo percentual da presença de tons de branco de 0
+a $100$\%. O valor é definido pelo brilho composto variando de 0 a
+$100$\% (Figura \ref{img_hsv} - b).
+
+\hspace*{0.65cm}Nessa representação, o eixo central do cone, que
+varia de 0 (base) a 1 (upse), representa os tons de cinza (sem
+cores), onde 0 é preto e 1 é branco.
+
+\subsection{CMYK \label{sc_cmyk}}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.3\linewidth]{imagens/cmyk.png}
+ \caption{Misturas de cores no padrão CMYK.}
+ Fonte: Autor ``adaptado de'' \cite{GATTASS_2006}
+ \label{img_cmyk}
+\end{figure}
+
+\hspace*{1.25cm}Como pode ser visto \cite{GATTASS_2006}, o CMYK (\textit{Cyan, Magenta, Yellow e Black})
+, também conhecido como modelo de cores baseado na
+subtração (absorção de luz), é formado pelas cores Ciano, Magenta,
+Amarelo e Preto, utilizado com maior freqüência para impressões
+gráficas. A Figura \ref{img_cmyk} representa as misturas de cores de
+um sistema CMYK.
+
+\hspace*{0.65cm}Neste trabalho, usaremos predominantemente os
+modelos RGB e HSV, por serem os mais populares e com maior número de
+estudos sobre eles.
+
+\section{Detecção de Transições \label{deteccao_de_transicoes}}
+
+\hspace*{1.25cm}A detecção de transições de um vídeo, tema central
+desta monografia, como já mencionado na Seção \ref{edicao_de_video},
+é o passo principal para o início da manipulação de qualquer amostra
+de vídeos, pois evidenciam marcos de início e fim de cada tomada do
+vídeo.
+
+\hspace*{0.65cm}Para cada tipo de transição existem métodos de maior
+ou menor eficiência. Dentre os métodos de detecção de transições de
+vídeo, a aplicação do Ritmo Visual (visto na Seção seguinte) e
+Morfologia Matemática são as mais utilizadas.
+
+\hspace*{0.65cm}Com a aplicação da morfologia matemática nas
+amostras de vídeo, é possível por exemplo, decompor as imagens em
+resíduos morfológicos e assim, retirar informações sobre as
+transições existentes. Com a aplicação deste método, bons resultados
+podem ser obtidos em relação a transições graduais, porém, o mesmo
+não ocorre em transições bruscas.
+
+\hspace*{0.65cm}Aplicando Ritmo Visual e Segmentação de Imagens, é
+possível representar um determinado evento de vídeo por um padrão de
+imagem 2D. Este método permite detectar transições como
+\textit{fades}, cortes e \textit{dissolves}.
+
+\hspace*{0.65cm}Como exemplo, na Figura
+\ref{img_transicoes_detectadas}, um vídeo representado na forma de
+``timeline'', onde as suas transições foram detectadas, delimitadas
+e nomeadas.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1\linewidth]{imagens/transicoes_detectadas.png}
+ \caption{Transições Detectadas (imagem ilustrativa).}
+ Fonte: Autor.
+ \label{img_transicoes_detectadas}
+\end{figure}
+
+\hspace*{0.65cm}Este trabalho tem como resultado esperado um produto
+final com funcionalidade próxima à Figura
+\ref{img_transicoes_detectadas}.

@@ -1,0 +1,326 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{a4wide}
+\usepackage[portuguese,english]{babel}
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{epsfig}
+\usepackage[latin1]{inputenc}
+\usepackage{doublespace}
+\usepackage{fancyheadings}
+\usepackage{longtable}
+\usepackage{dropping}
+\usepackage{url}
+\usepackage{subfigure}
+\usepackage[top=3cm,left=3cm,bottom=2cm,right=2cm]{geometry}
+\usepackage{apalike}
+
+
+\newcommand{\figr}[1]{Figura~\ref{#1}}
+\newcommand{\eqt}[1]{Eq.~(\ref{#1})}
+\newcommand{\eqts}[2]{Eq.~(\ref{#1})~e~(\ref{#2})}
+\newcommand{\eqtss}[3]{Eq.~(\ref{#1})~,~(\ref{#2})~e~(\ref{#3})}
+\newcommand{\tab}[1]{Tabela~\ref{#1}}
+
+%comandos para se definir cabeçalhos nas páginas da dissertação
+\pagestyle{fancyplain}
+
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\small\leftmark}}
+\rhead[\fancyplain{}{\small\rightmark}]{\fancyplain{}{\thepage}}
+\cfoot{\fancyplain{\thepage}{}}
+
+%package para reconhecimento de acentuação em português
+\usepackage[latin1]{inputenc}
+
+%package para reconhecimento de português
+\usepackage{babel}
+
+%package para uso de verbatimtab
+%\usepackage{moreverb}
+
+%configuração para numeração de subsubseções
+\setcounter{secnumdepth}{3}
+
+% Frases de efeito no início de cada capítulo
+\newcommand{\epigraph}[2]{%
+  \vspace{1ex}%
+  {\footnotesize%
+   \begin{spacing}{1}
+    \begin{flushright}%
+      \begin{minipage}{.6\textwidth}%
+        #1\\
+      \end{minipage}\\
+      \textit{#2}%
+    \end{flushright}
+    \end{spacing}}%
+  \vspace{1ex}}
+
+
+
+\begin{document}
+
+%-----------------------------------
+% PRIMEIRA CAPA DE APRESENTAÇÃO EM PORTUGUÊS
+%-----------------------------------
+\thispagestyle{empty}
+
+\begin{center}
+\begin{large}
+CENTRO UNIVERSITÁRIO DA FEI
+\end{large}
+\end{center}
+
+
+\begin{spacing}{1.0}
+\begin{center}
+\begin{large}
+\vspace{2.0cm}
+THIAGO MIZUTANI\\
+FABRÍCIO LOPES DE SOUZA\\
+MAURÍCIO KENITI HIROTA\\
+IVAN SHIGUENORI MACHIDA
+\end{large}
+\end{center}
+
+\vspace {4 cm}
+
+\begin{spacing}{1.5}
+\begin{center}
+\begin{huge}
+{M-FIT: EDITORAÇÃO ELETRÔNICA DE VÍDEOS COM DETECÇÃO DE TRANSIÇÕES}
+\end{huge}
+\end{center}
+\end{spacing}
+
+\vspace {4 cm}
+\vspace {3.5 cm}
+
+\begin{center}
+\begin{large}
+%São Bernardo do Campo 2007\\[0.2 cm]
+Orientador: Paulo Sérgio Silva Rodrigues \\[0.2 cm]
+\end{large}
+\end{center}
+
+\end{spacing}
+\newpage
+
+
+%-----------------------------------
+% CAPA DE APRESENTAÇÃO EM PORTUGUÊS
+%-----------------------------------
+\thispagestyle{empty}
+
+\begin{spacing}{1.0}
+
+\begin{center}
+\begin{large}
+THIAGO MIZUTANI\\
+FABRÍCIO LOPES DE SOUZA\\
+MAURÍCIO KENITI HIROTA\\
+IVAN SHIGUENORI MACHIDA
+\end{large}
+\end{center}
+
+\vspace {4 cm}
+
+\begin{spacing}{1.5}
+\begin{center}
+\begin{huge}
+{M-FIT: EDITORAÇÃO ELETRÔNICA DE VÍDEOS COM DETECÇÃO DE TRANSIÇÕES}
+\end{huge}
+\end{center}
+\end{spacing}
+
+\vspace {3 cm}
+
+\begin{flushright}
+\begin{minipage}[t]{8.5 cm}
+Trabalho de Conclusão de Curso, apresentado no Centro Universitário
+da FEI, como parte dos requisitos necessários para obtenção do
+título de Bacharel em Ciências da Computação, orientado pelo Prof.
+D.Sc. Paulo Sérgio Silva Rodrigues.
+\end{minipage}
+\end{flushright}
+
+\vspace {3.5 cm}
+
+\begin{center}
+\begin{large}
+São Bernardo do Campo \\[0.2 cm]
+2008
+\end{large}
+\end{center}
+
+\end{spacing}
+\newpage
+
+%-----------------------------------
+%        FOLHA APRESENTACAO
+%-----------------------------------
+    \thispagestyle{empty}
+\begin{center}
+THIAGO MIZUTANI\\
+FABRÍCIO LOPES DE SOUZA\\
+MAURÍCIO KENITI HIROTA\\
+IVAN SHIGUENORI MACHIDA\\
+    \vspace*{3.0mm}
+"M-FIT: Editoração Eletrônica de Vídeos com Detecção de Transições"
+    %\vspace*{5.0mm}
+
+Trabalho de Conclusão de Curso - Centro Universitário da FEI\\
+Comissão Julgadora:
+\end{center}
+
+    %\vspace*{3.0mm}
+    $$
+    \begin{array}{cccccccccccccccccccccccccccccccc}
+    & & & & & & & & & & & & & & & & & & & & & & & & & & & &\\
+    \hline
+    \end{array}
+    $$
+    \centerline {Prof. Dr. Sc. Paulo Sérgio Silva Rodrigues} \centerline
+    {\small Orientador e Presidente}
+
+    %\vspace*{3.0mm}
+
+    %\thispagestyle{empty}
+    $$
+    \begin{array}{cccccccccccccccccccccccccccccccc}
+    & & & & & & & & & & & & & & & & & & & & & & & & & & & &\\
+    \hline
+    \end{array}
+    $$
+    \centerline {Examinador (1)} \centerline
+    {\small}
+
+    %\vspace*{3.0mm}
+
+    %\thispagestyle{empty}
+    $$
+    \begin{array}{cccccccccccccccccccccccccccccccc}
+    & & & & & & & & & & & & & & & & & & & & & & & & & & & &\\
+    \hline
+    \end{array}
+    $$
+    \centerline {Examinador (2)} \centerline
+    {\small}
+\begin{center}
+São Bernardo do Campo 2008
+\end{center}
+
+    \thispagestyle{empty}
+
+%°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+
+
+%-----------------------------------
+% DOCUMENTAÇÃO DO TRABALHO
+%-----------------------------------
+\newpage
+
+\thispagestyle{empty}
+\begin{spacing}{1.0}
+\include{dedicatoria}
+\end{spacing}
+\thispagestyle{empty}
+
+\newpage
+
+ \thispagestyle{empty}
+
+\begin{spacing}{1.5}
+\include{agradecimentos}
+\end{spacing}
+\thispagestyle{empty}
+
+\newpage
+
+\thispagestyle{empty}
+
+\begin{spacing}{1.0}
+\include{epigrafe}
+\end{spacing}
+\thispagestyle{empty}
+
+\newpage
+
+\pagenumbering{roman} \setlength{\voffset}{0.0in}
+
+\begin{spacing}{1.0}
+\include{resumo}
+\end{spacing}
+
+\begin{spacing}{1.0}
+\include{abstract}
+\end{spacing}
+
+\selectlanguage{portuguese}
+
+\begin{spacing}{1.0}
+\renewcommand{\contentsname}{Sumário}\tableofcontents
+\listoffigures
+\listoftables
+\end{spacing}
+
+\clearpage
+
+\setcounter{page}{0} \pagenumbering{arabic}
+
+% Aqui entram todos os tópicos
+\begin{spacing}{1.5}
+%\include{unico}
+\include{Introducao}
+\include{objetivo}
+\include{trabalhos}
+
+%sub topicos da revisao bibliografica
+%---------------------------
+\include{edicao_de_video}
+\include{sistemas_de_video_e_cor}
+%\include{sistemas_de_video}
+%\include{sistemas_de_cor}
+%\include{deteccao_de_transicoes}
+\include{ritmo_visual_e_filtragem}
+%\include{ritmo_visual}
+%\include{filtragem_espacial}
+%\include{deteccao_de_bordas_morfologia_segmentacao}
+%\include{deteccao_de_bordas}
+%\include{morfologia_matematica}
+%\include{segmentacao_de_imagens}
+%\include{casamento_de_padroes_e_entropia}
+%\include{casamento_de_padroes}
+%\include{entropia}
+%---------------------------
+\include{metodologia}
+\include{requisitos}
+%\include{requisitos_de_negocio} %Incluso o título do capítulo
+%\include{requisitos_de_sistema}
+%\include{requisitos_de_usuario}
+\include{modelagem_sistema}
+%\include{use_case_edicao}
+%\include{use_case_deteccao}
+%\include{use_case_cortes}
+%\include{use_case_fades}
+%\include{use_case_dissolves}
+%\include{diagrama_de_classes}
+%\include{diagramas_de_sequencia}
+%\include{diagrama_de_estados}
+%\include{resultados_esperados}
+\include{resultados_obtidos}
+\include{conclusao}
+\include{glossario}
+\end{spacing}
+
+\appendix
+
+%\include{apendice}
+
+%Bibliografia
+\begin{spacing}{1.0}
+\bibliographystyle{apalike}
+%\bibliographystyle{abbrv}
+\bibliography{referencias}
+\end{spacing}
+
+\end{document}

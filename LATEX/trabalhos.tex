@@ -1,0 +1,146 @@
+\chapter{TRABALHOS RELACIONADOS \label{trabalhos}}
+
+\section{Detecção de Transições \label{trabalhos_transicao}}
+
+\hspace*{1.25cm}Uma das técnicas mais comuns e importantes na área
+de editoração de vídeos é a detecção de transições.
+
+\hspace*{0.65cm}\cite{GUIMARAES_2003_2} propuseram um método para
+fazer a detecção de transições em um vídeo, aplicando o operador
+gradiente multi-escalar morfológico em cima de uma determinada
+amostragem do vídeo. Através deste método, puderam obter bons
+resultados em relação à detecção de transições graduais, porém, o
+método não foca na dimensão da transição.
+
+\hspace*{0.65cm}\cite{GUIMARAES_2004} propuseram um método para
+detectar transições graduais (fade,dissolve) utilizando ritmo visual
+e morfologia matemática. O foco principal é usar operadores de
+morfologia matemática, no caso, o operador gradiente multi-escalar
+morfológico, para aumentar os vestígios de transições na imagem do
+ritmo visual, não alterando os já explícitos. Com a aplicação deste
+método obtiveram uma taxa de acerto de $93.5$\% e um custo
+computacional mais baixo do que em outros experimentos. O método em
+si não garante uma eficácia quanto a outros tipos de transições.
+
+\hspace*{0.65cm}Com o objetivo de realizar a identificação e
+classificação de transições graduais entre duas zonas planas
+consecutivas (conjunto de pontos consecutivos com os mesmos tons de
+cinza), \cite{GUIMARAES_2004} aplicaram um método baseado na
+decomposição hierárquica dos componentes da imagem em resíduos
+morfológicos. Com o uso deste método, é possível retirar as
+informações necessárias sobre a transição e ainda fazer a
+reconstrução exata da imagem a partir dos seus resíduos. Desta
+forma, conseguiram fazer a detecção e identificação das transições
+facilmente. Apesar de o método funcionar bem em relação às
+transições graduais, o trabalho não faz referência às transições
+bruscas.
+
+\hspace*{0.65cm}\cite{GUIMARAES_2001_2} desenvolveram um método para
+a detecção de cortes de vídeos digitais, a partir da aplicação de
+ritmo visual. Com este método, conseguiram obter com sucesso as
+transições de corte de um vídeo. A partir deste estudo, é possível
+desenvolver métodos para detecções de outros tipos de transições.
+
+\hspace*{0.65cm}\cite{SIMOES_2004} apresentou um método para
+detecção de transições abruptas (cortes) em vídeos, baseado em
+algoritmos de identificação de padrão em sinais 1D. O método
+proposto possibilitou a detecção de transições abruptas, ficando
+aberto a novas propostas para a detecção de outros tipos de
+transição.
+
+\hspace*{0.65cm}\cite{NGO_1999} com a intenção de fazer a detecção
+de transições do tipo corte e dissolve, propuseram um método baseado
+em Ritmo Visual, com o qual foi possível fazer a detecção e
+classificação das transições de uma maneira eficiente. Ressalta-se
+ainda que, futuramente, pretende-se fazer uma análise de tomadas de
+vídeos para fazer indexação de vídeos e recuperação de dados.
+
+\hspace*{0.65cm}\cite{GUIMARAES_2004} propuseram um método que faz
+uso de Ritmo Visual (transformação dos eventos do vídeo em padrões
+de imagens 2D), juntamente com a aplicação de operadores de
+Morfologia Matemática e Topologia Digital para fazer a detecção e
+identificação dos eventos de transição de um vídeo, com isso,
+puderam fazer a detecção de fades curtos com uma baixa taxa de
+erros, sendo possível ainda desenvolver uma extensão do método para
+detecção de outros tipos de transições, assim como fazer a aplicação
+do método diretamente nos dados do vídeo.
+
+\hspace*{0.65cm}\cite{LEFEVRE_2003}, apresentaram uma gama de
+algoritmos referentes a identificação de transições em vídeos sem
+compressão utilizando métodos baseados em pixel, histograma, bloco,
+características, movimento, entre outros. O objetivo era analisar o
+custo computacional de cada algoritmo e compará-los. Concluiu-se que
+os algoritmos de baixa complexidade geralmente possuem um baixo
+custo computacional, porém, dispõem de uma qualidade menor nas
+detecções. Em contrapartida, algoritmos que utilizam lógicas mais
+complexas, como a análise de movimento e característica, ou um
+método que use vários algoritmos, conseguem obter um resultado final
+com boa qualidade em termos de detecção de transição. Porém, possuem
+um custo computacional mais alto.
+
+\hspace*{0.65cm}\cite{GUIMARAES_2001} propuseram um método que
+transforma o problema de segmentação de vídeo em um problema de
+detecção de padrões , onde cada efeito de vídeo é transformado em
+diferentes padrões de ritmo visual. Obtiveram bons resultados em
+comparação à outros métodos em relação a robustez, falhas e medidas
+de gama, porém foram piores que outros métodos em relação a
+quantidade de detecções quando não há nenhuma falsa-detecção
+(falseless error).
+
+\hspace*{0.65cm}\cite{GUIMARAES_2002_3} propuseram um método para
+detecção de transições parametrizadas e direcionais, baseado em
+resíduos morfológicos considerando elementos linearmente
+estruturados. Com o método proposto, puderam identificar facilmente
+as transições, fato que não é possível, por exemplo, com o método
+que utiliza o gradiente Soille \cite{GUIMARAES_2002}.
+
+\hspace*{0.65cm}Com o objetivo de identificar o limite entre tomadas
+consecutivas de um determinado segmento de vídeo,
+\cite{GUIMARAES_2002_2} utilizaram um método baseado no ritmo visual
+e Morfologia matemática, onde cada evento de vídeo é representado
+por um padrão em uma imagem 2D. Através da aplicação destes métodos,
+puderam identificar facilmente as transições de um segmento de
+vídeo, porém foram somente aplicadas aos efeitos de transições
+fades, cortes e dissolve.
+
+\hspace*{0.65cm}Com o objetivo de identificar cortes de uma cena
+utilizando um único algoritmo, \cite{FANG_2006} propuseram a
+aproximação de lógica Fuzzy para integrar funcionalidades híbridas
+para a detecção de cortes de uma cena dentro de um vídeo aleatório.
+A aproximação da lógica Fuzzy contém dois modos de processamento,
+onde um é dedicado à detecção de cortes bruscos de cenas e também
+transições do tipo dissolve, e o outro para transições graduais.
+Estes dois modos são unificados por um seletor de modos que decide
+qual modo o esquema deve trabalhar para atingir o melhor desempenho
+de detecção.
+
+\hspace*{0.65cm}Com o objetivo de detectar cortes de cenas e
+otimizar o custo de tempo humano, \cite{YU_2001} utilizaram a
+diferença de métrica baseado no histograma de cores de sucessivos
+frames de uma seqüência de vídeo utilizando a entropia de um
+limiar, onde o limiar é a base da diferença dos histogramas de tons
+de cinza de um determinado frame. Por outro lado, para confirmar os
+resultados, são necessárias interações humanas e um procedimento de
+eliminação de falsa detecção futuramente será desenvolvido para
+melhorar a precisão.
+
+\section{Técnicas de PDI \label{trabalhos_pdi}}
+
+\hspace*{1.25cm}Para realizar a detecção de transições ou qualquer
+tipo de editoração de vídeos, são necessárias técnicas de PDI como
+Morfologia Matemática, Filtragem Espacial, Detecção de Bordas, entre
+outras.
+
+\hspace*{0.65cm}Com o objetivo de segmentar imagens,
+\cite{BERTRAND_1997} utilizaram transformações de níveis e
+homotópicas (estudos dos pontos de cruzamento da topologia e
+reconstrução da transformação). Utilizando estas técnicas,
+conseguiram segmentar imagens em tons de cinza, sendo que estas não
+se aplicam a imagens RGB.
+
+\hspace*{0.65cm}Com o objetivo de analisar a morfologia de imagens
+3D, \cite{MICHIELSEN_2001} utilizaram o corte dos lados de um cubo
+3D e aplicaram a morfologia matemática e a tripla periódica mínima
+que verifica a continuidade de uma superfície. Com estas técnicas,
+conseguiram caracterizar a morfologia de uma imagem 3D em tons de
+cinza, sendo que não se aplicam a imagens em RGB.

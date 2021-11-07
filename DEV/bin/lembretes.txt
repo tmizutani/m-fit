@@ -1,0 +1,13 @@
+Lembretes TCC:
+
+- RETIRAR TODOS OS LOGS QUANDO FOR ENTREGAR A VERSÃO FINAL!!!!!
+
+Retirar do processo da documentação:
+
+- Suavização do RV pelo lowPass (NÃO PRECISA MAIS!!!)
+
+Incluir:
+
+- Filtro de Canny (estudos e diagramas)
+- Transformação do frame em escalas de cinza (diagramas)
+

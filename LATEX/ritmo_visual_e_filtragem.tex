@@ -1,0 +1,702 @@
+\section{Ritmo Visual \label{ritmo_visual}}
+
+\hspace*{1.25cm}Ritmo Visual é definido como a representação de um
+segmento de imagens $2D+t$ (um vídeo) em uma única imagem na
+dimensão $2D$, sendo portanto uma tentativa de tornar o trabalho de
+análise de vídeo mais simplificado.
+
+Existem dois tipos de representações do ritmo visual. Ritmo Visual
+por histograma e por sub-amostragem. A seguir, ambos são
+apresentados mais detalhadamente.
+
+\subsection{Ritmo Visual por sub-amostragem \label{ritmo_visual_amostragem}}
+
+\hspace*{1.25cm}O Ritmo Visual por sub-amostragem caracteriza-se
+pela transformação de determinadas faixas de pixels (amostras) de
+cada um dos \textit{frames} de um vídeo em uma coluna da representação $2D$,
+como representado na Figura \ref{img_rvdiagonal}. Desta forma,
+pode-se dizer que o Ritmo Visual é uma simplificação do vídeo.
+
+\hspace*{0.65cm}O padrão desta representação pode ser alterado
+conforme a escolha dos pixels, portanto, o padrão do ritmo visual é
+totalmente dependente do tipo da amostragem retirada do vídeo. Bons
+resultados podem ser obtidos se a sub-amostragem do \textit{frame} for dada
+pela sua diagonal principal, uma vez que ela trará características
+horizontais e verticais do \textit{frame}, podendo assim fazer uma boa
+representação do mesmo. Uma melhor abordagem sobre este processo
+pode ser encontrada em \cite{GUIMARAES_2003_2} e
+\cite{GUIMARAES_2001_2}.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.3\linewidth]{imagens/rv_diagonal.png}
+ \caption{Transformação da diagonal principal dos \textit{frames} de um
+vídeo em colunas do Ritmo Visual.}
+ \label{img_rvdiagonal}
+ Fonte: Autor ``adaptado de'' \cite{GUIMARAES_2002_2}, p.2.
+\end{figure}
+
+\hspace*{0.65cm}Na Figura \ref{img_rvdiagonal} pode ser observado o
+processo de transformação das diagonais principais dos \textit{frames} $1$,
+$2$, $3$, $4$ e $5$ nas colunas $1$, $2$, $3$, $4$, e $5$ do Ritmo
+Visual.
+
+\hspace*{0.65cm}Formalmente \cite{GUIMARAES_2004}, pode-se definir
+Ritmo Visual (RV) da seguinte maneira:
+
+\hspace*{0.65cm}Seja $\bigvee = {I_1, I_2, ..., I_n}$ um vídeo e
+$I_i(x,y)$ um \textit{frame} $\in V$.
+
+\hspace*{0.65cm}Um pixel qualquer de um \textit{frame} é definido como
+$p(x,y)$ com $x,y \in N$, sendo que os valores de $x$ e $y$ variam
+de 0 até o valor de largura e altura do \textit{frame}, respectivamente.
+
+\hspace*{0.65cm}Em uma imagem em tons de cinza, cada pixel possui um
+valor de luminância $L \in {0,1,...,255}$. Sendo assim, se $L(x,y) =
+0$, o pixel é definido como preto e caso $L(x,y) = 255$, o pixel é
+definido como branco.
+
+\hspace*{0.65cm}Por outro lado, em uma imagem RGB (Seção
+\ref{sc_rgb}), $L(x,y)$ é definido pelo conjunto do tom das 3 cores
+(vermelho, verde e azul) deste sistema de cores. Para cada cor
+existe um $l(x,y) \in {0,...,255}$, cuja combinação resulta em uma
+cor com uma determinada tonalidade do pixel $P(x,y)$. Sendo assim,
+em um sistema RGB, define-se que $L(x,y) = [l(x,y),l(x,y),l(x,y)]$.
+
+\hspace*{0.65cm}Neste trabalho, as imagens serão todas tratadas em
+tons de cinza.
+
+\hspace*{0.65cm}Portanto, Ritmo Visual é definido como:
+
+\hspace*{0.65cm}Seja $D_i$ uma diagonal do \textit{frame} $I_i$. A sequência
+de todas as diagonais $D_i \in \bigvee$, chama-se Ritmo Visual do
+vídeo $\bigvee$.
+
+\hspace*{0.65cm} Na Figura \ref{img_rv_exemplos} podem ser
+observados três exemplos de Ritmo Visual. Cada tipo de transição
+gera uma coluna com características, padrões diferentes no ritmo
+visual.
+
+\begin{figure}[h|top]
+\centering
+\begin{minipage}[b]{5.0cm}
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/rv_cuts.png}
+ (a)
+\end{minipage}
+\begin{minipage}[b]{5.0cm}
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/rv_fades.png}
+ (b)
+\end{minipage}
+\begin{minipage}[b]{5.0cm}
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/rv_dissolve.png}
+ (c)
+\end{minipage}
+\caption{Representações de Ritmo Visual: a) cortes; b) fade-out
+seguido de fade-in; c) duas transições consecutivas do tipo
+dissolve.} Fonte: \cite{GUIMARAES_2002_2}, p.4.
+\label{img_rv_exemplos}
+\end{figure}
+
+\hspace*{0.65cm}Como visto na Figura \ref{img_rv_exemplos} - a, os
+cortes são caracterizados no Ritmo Visual por linhas verticais.
+Porém, pela possível existência de ruídos na imagem gerada, nem
+todas as linhas verticais devem ser consideradas necessariamente um
+corte. Para resolver este problema, algumas técnicas de filtragem
+espacial podem ser aplicadas, diminuindo a intensidade dos ruídos.
+
+\subsection{Ritmo Visual por Histograma\label{ritmo_visual_histograma}}
+
+\hspace*{1.25cm}Como o Ritmo Visual por sub-amostragem, o Ritmo
+Visual por Histograma (RVH) tem como objetivo simplificar a
+representação de um vídeo. O processo de criação de um RVH é :
+
+\begin{enumerate}
+\item Captura da diagonal principal do \textit{frame}.
+\item Cálculo do histograma desta diagonal.
+\item Obtenção do valor médio da luminância deste histograma.
+\item Os passos 1, 2 e 3 são repetidos para todos os \textit{frames}, e os pontos obtidos com o passo 3, são agrupados.
+\end{enumerate}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/RVH.png}
+ \caption{Representações de Ritmo Visual Por Histograma}
+ Fonte: Autor.
+ \label{img_rvh}
+\end{figure}
+
+\hspace*{0.65cm}A Figura \ref{img_rvh} representa os passos para a
+criação do RVH. O passo 3 é representado pela reta horizontal
+vermelha no histograma da diagonal.
+
+\hspace*{0.65cm}Matematicamente (\cite{GUIMARAES_2003_2}):
+
+\hspace*{0.65cm}Seja $Hi$ o histograma da diagonal $Di$ do \textit{frame}
+$Ii$, a função $med(Hi)$ o valor médio das luminâncias presentes no
+\textit{frame} (i.e., a média do histograma).
+
+\hspace*{0.65cm}A sequência de todos os $med(Hi) \in \bigvee$
+agrupados é chamado de RVH.
+
+\hspace*{0.65cm}Neste trabalho, as técnicas de Ritmo Visual serão
+utilizadas para transformar o nosso problema de segmentação de
+vídeos em um problema de segmentação de imagens.
+
+\section{Processamento de Baixo Nível \label{baixo_nivel}}
+
+\subsection{Filtragem Espacial \label{filtragem_espacial}}
+
+\hspace*{1.25cm}Filtragem Espacial é uma técnica utilizada na área
+de processamento de imagens para realizar a suavização ou realce de
+detalhes da imagem, ou até mesmo a eliminação de elementos
+indesejáveis dessas imagens, como por exemplo, os ruídos.
+
+\hspace*{0.65cm}Como visto em \cite{FELGUEIRAS_2006} para a
+aplicação de um filtro, utiliza-se o conceito de operadores de
+vizinhança, que consiste em alterar o Nível Digital ($ND$), o qual
+pode ser o nível de tons de cinza, ou cor, de um pixel através do
+$ND$ de seus pixels vizinhos. Dependendo do filtro a ser utilizado
+este cálculo pode ser alterado. Geralmente, cria-se uma máscara de
+convolução, que nada mais é do que uma matriz (normalmente de
+tamanho $3\times3$, como na Figura \ref{img_mascaras_convolucao})
+que possui um determinado peso em cada uma de suas posições.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/mascaras.png}
+ \caption{Exemplos de Máscaras para filtro passa-alta.}
+ Fonte: Autor ``adaptado de'' \cite{FELGUEIRAS_2006}.
+ \label{img_mascaras_convolucao}
+\end{figure}
+
+\hspace*{0.65cm}O pixel a ter seu $ND$ recalculado é sempre aquele
+que estiver sob a posição central da matriz, como mostrado na Figura
+\ref{img_filtragem_masc}:
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.5\linewidth]{imagens/filtragem_masc.png}
+ \caption{Máscara 3x3 sendo utilizada para a filtragem de uma
+imagem digital. No caso, o $ND$ a ser recalculado é do pixel X.}
+ Fonte: Autor ``adaptado de'' \cite{FELGUEIRAS_2006}.
+ \label{img_filtragem_masc}
+\end{figure}
+
+\hspace*{0.65cm}O cálculo do novo $ND$ de um pixel é dado pelo
+processo de convolução, que consiste na soma dos produtos entre os
+valores da matriz e pixels correspondentes da imagem, onde esta
+matriz percorre toda a imagem pixel a pixel, partindo da esquerda
+para a direita. Tal deslocamento é obtido através da soma de 1 pixel
+na posição X atual da matriz, como pode ser observado na Figura
+\ref{img_filtragem_masc}.
+
+\hspace*{0.65cm}Como visto em \cite{FELGUEIRAS_2006}, o cálculo do
+ND de um pixel, através do processo de convolução de uma imagem é
+dado por:
+
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:convolucao} ND = \sum_{i=1}^{n}{MiOi}
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde $M$ é uma matriz de convolução $3\times3$, $O$
+é a imagem a ser filtrada e $n$ é o número de elementos de M.
+
+\hspace*{0.65cm}Entre os principais tipos de filtragem está o filtro
+passa-alta, que pode ser uma boa alternativa para fazer a detecção
+de bordas e o filtro passa-baixa, com o qual é possível realizar a
+suavização da imagem, resultando na diminuição de possíveis ruídos
+presentes na mesma.
+
+\begin{figure}[h|top]
+\centering
+\begin{minipage}[b]{7.0cm}
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/filtragem_a.png}
+ (a)
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{7.0cm}
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/filtragem_b.png}
+ (b)
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{7.0cm}
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/filtragem_c.png}
+ (c)
+\end{minipage}
+\caption{a) Imagem Original; b) Passa-baixa; c) Passa-alta.} Fonte:
+Autor ``adaptado de'' OpenCV Samples. \label{img_exemplos_filtros}
+\end{figure}
+
+
+\hspace*{0.65cm}Como pode ser observado na Figura
+\ref{img_exemplos_filtros} - b, ao aplicar um filtro passa-baixa na
+imagem, ela torna-se mais homogênea e também perde-se nitidez, porém
+os ruídos são suavizados. Já na Figura \ref{img_exemplos_filtros} -
+c, foi aplicado um filtro passa-alta na imagem, havendo um aumento
+do contraste entre os objetos e o fundo da imagem, ganha-se nitidez
+e caso existam ruídos na imagem original, estes poderão ser
+realçados assim como as bordas dos objetos.
+
+\hspace*{0.65cm}Uma abordagem mais completa sobre este assunto pode
+ser encontrada
+em \\
+\cite{FELGUEIRAS_2006}, \cite{STIVANELLO_2005} e \\
+\cite{GONZALEZ_2002}.
+
+\subsection{Detecção de Bordas \label{deteccao_de_bordas}}
+
+\hspace*{1.25cm}Detecção de Bordas é uma técnica para localizar os
+pontos e linhas que dividem regiões distintas de uma determinada
+imagem. A detecção das bordas pode ser feita através do uso de
+diversos operadores. Como visto em \cite{GIOVANE_2002},
+computacionalmente, define-se uma borda como sendo uma região que
+possui um gradiente de alta magnitude. Por este fato, o operador de
+Sobel é uma interessante forma de se realizar a detecção de bordas,
+visto que este operador é baseado no cálculo do gradiente e sua
+magnitude.
+
+\hspace*{0.65cm}Segundo \cite{SEARA_1998}, o cálculo do gradiente é
+dado por:
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:gradiente}
+    \nabla f =  \begin{bmatrix} Gx \\ Gy \end{bmatrix} =
+    \begin{bmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{\partial y} \end{bmatrix}
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}E sua magnitude é dada por:
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:magnitude} mag(\nabla f) = [ G_x^2 + G_y^2 ]^\frac{1}{2}
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde:
+
+\begin{large}
+\begin{center}
+    $G_x =  \begin{bmatrix}         1 & 2 & 1 \\
+                                    0 & 0 & 0 \\
+                                    -1 & -2 & -1
+                \end{bmatrix}
+    $ e
+    $G_y =  \begin{bmatrix}       -1 & 0 & 1 \\
+                                  -2 & 0 & 2 \\
+                                  -1 & 0 & 1
+            \end{bmatrix}
+    $
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}São operadores que aplicam o processo de convolução
+na imagem como visto no tópico anterior.
+
+\hspace*{0.65cm}Através destes cálculos é possível obter, além da
+magnitude, a direção do gradiente.
+
+\hspace*{0.65cm}Este operador realiza a detecção de bordas em duas
+etapas. Primeiramente, fará a detecção das bordas horizontais da
+imagem (Figura \ref{img_sobel} - b), utilizando a máscara $G_x$ e
+depois fará a detecção das bordas verticais (Figura \ref{img_sobel}
+- c), aplicando a máscara $G_y$. Com a união e normalização do
+resultado destes dois processos de detecção de bordas, obtém-se o
+mapa de bordas da imagem (Figura \ref{img_sobel} - c).
+
+\begin{figure}[Ht]
+\centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/borda_sobel_original.png}
+        (a)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/borda_sobel_horizontal.png}
+        (b)
+    \end{minipage}
+    \par
+    \centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/borda_sobel_vertical.png}
+        (c)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/borda_sobel_completo.png}
+        (d)
+    \end{minipage}
+    \caption{a) Imagem Original; b) Sobel Horizontal; c) Sobel Vertical; d) Sobel Completo.}
+    Fonte: Autor ``adaptado de'' OpenCV Samples.
+    \label{img_sobel}
+\end{figure}
+
+\hspace*{0.65cm}Através da aplicação deste operador, é possível
+obter uma boa detecção de bordas. Em contrapartida, este processo
+pode causar um indesejável aumento dos ruídos na imagem. Isto se
+deve ao fato de que, ao passar pelos processos de convolução e
+cálculo de magnitude do gradiente, os ruídos, assim como as bordas,
+retornam um valor de magnitude elevada, sendo necessário aplicar
+outros processos de filtragem para a redução dos mesmos
+(\cite{FELGUEIRAS_2006}).
+
+\hspace*{0.65cm}Outro método também eficiente para realizar a
+detecção de bordas de uma imagem, é a utilização do operador de
+Canny. Este operador é baseado em três critérios básicos
+\cite{SEARA_1998}, os quais, segundo Canny, qualquer filtro para
+detecção de bordas deve atender \cite{GIOVANE_2002}. São eles:
+
+\begin{enumerate}
+\item Alta razão Sinal/Ruído (SNR)
+\item Ótima localização (L)
+\item Boa resposta
+\end{enumerate}
+
+\hspace*{0.65cm}Onde SNR representa a eficiência do filtro em
+relação a falsos positivos (detecção de falsas bordas, ruídos), ou
+seja, o filtro deve detectar o máximo de bordas verdadeiras (Sinal)
+existentes na imagem. Quanto maior o SNR, melhor será a detecção.
+
+\hspace*{0.65cm}O critério de localização, como o nome já diz, está
+ligado à localização real da borda na imagem e àquela apontada pelo
+filtro. Quanto menor a distância entre a borda detectada e a borda
+real, melhor será o filtro.
+
+\hspace*{0.65cm}O último dos critérios corresponde à quantidade de
+respostas geradas pelo filtro em relação a uma única borda. Para
+cada borda existente na imagem, o filtro deve apontar somente uma
+resposta.
+
+\hspace*{0.65cm}Tais conceitos podem ser vistos em
+\cite{GIOVANE_2004} e \cite{GIOVANE_2002}.
+
+\hspace*{0.65cm}Para atender a estes critérios, são adotados, além
+de processos de convolução (Seção \ref{filtragem_espacial}),
+processos de Supressão não Máxima e Histerese.
+
+\hspace*{0.65cm}A Supressão não Máxima consiste na eliminação dos
+pixels da região perpendicular à direção da borda que não possuírem
+magnitude máxima \cite{GIOVANE_2004}, onde a magnitude dos pixels é
+dada por:
+
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:magnitude_canny} M(x,y) = [ I_x(x,y)^2 + I_y(x,y)^2
+]^\frac{1}{2}
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde $I_x$ é a imagem convoluída na direção X e
+$I_y$ é a imagem convoluída na direção Y.
+
+\hspace*{0.65cm}Como visto no início desta seção, as bordas são
+representadas por pixels que possuem gradiente de alta magnitude.
+Devido à ruídos presentes na imagem, após os processos de
+convolução, podem haver diversos pixels representando um único ponto
+de borda verdadeiro. Porém, aquele que possuir o gradiente com maior
+magnitude é o candidato mais forte para representar a borda
+(\cite{GIOVANE_2002}). Através do processo de supressão não máxima,
+os pixels de magnitude não máxima são eliminados, restando somente 1
+pixel representando 1 ponto de borda, o que melhora a performance do
+filtro e atende ao terceiro critério citado anteriormente.
+
+\hspace*{0.65cm}Exemplos e melhores explicações da aplicação deste
+processo podem ser encontradas em \cite{GIOVANE_2002}.
+
+\hspace*{0.65cm}Para atender ao critério da localização, é utilizado
+o processo de histerese, ou limiarização adaptativa
+\cite{GIOVANE_2004}. Este processo consiste em aplicar duas vezes o
+processo de limiarização em uma mesma imagem, com a utilização de
+dois limiares, $T_{1}$ e $T_{2}$, onde $T_{1} = 2T_{2}$ ou $T_{1} =
+3T_{2}$. A limiarização se dá da seguinte forma:
+
+\begin{enumerate}
+\item Verifica-se se a luminância do pixel é maior que $T_{1}$, se for, ele é automaticamente
+aceito como borda;
+\item Se a luminância do pixel for menor que $T_{2}$, este pixel será automaticamente
+rejeitado;
+\item Se o valor da luminância estiver entre os dois limiares, este será aceito somente se
+os seus pixels imediatamente vizinhos, forem pixels com alto valor
+de luminância.
+\end{enumerate}
+
+\hspace*{0.65cm}Com a aplicação destes operadores é possível obter o
+Mapa de Bordas de uma imagem, que é a imagem original filtrada, onde
+os pixels pertencentes a uma borda, são destacados (representados
+por pixels brancos) e aqueles que não forem pertencentes a uma borda
+são ignorados (representados por pixels pretos). Um exemplo de mapa
+de bordas pode ser visto na Figura \ref{img:mapa_de_bordas}.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1.0\linewidth]{imagens/mapa_de_bordas.png}
+ \caption{Mapa de bordas gerado com operador de Canny. }
+ Fonte: Autor
+ \label{img:mapa_de_bordas}
+\end{figure}
+
+\hspace*{0.65cm}Neste trabalho, serão utilizadas técnicas de
+detecção de bordas para fazer o realce das bordas do ritmo visual
+que possivelmente representem uma transição.
+
+\hspace*{0.65cm}Melhores abordagens sobre estes métodos podem ser
+encontradas
+em \cite{SANTOS_2005}, \cite{MADRUGA_2005}, \cite{BOTELHO_2007}, \\
+\cite{FELGUEIRAS_2006}, \cite{STIVANELLO_2005} e \\
+\cite{GONZALEZ_2002}.
+
+\section{Processamento de Médio Nível \label{medio_nivel}}
+\subsection{Morfologia Matemática \label{morfologia_matematica}}
+
+\hspace*{1.25cm}Morfologia Matemática é basicamente o estudo das
+formas de objetos através da aplicação de determinadas operações
+matemáticas. Na área de processamento de imagens a morfologia pode
+ser aplicada em uma imagem com o objetivo de realizar o seu
+reconhecimento, a eliminação de ruídos, detecção de bordas, através
+do uso de algumas operações morfológicas. Segundo
+\cite{NOGUEIRA_2002}, a base da morfologia matemática é composta por
+dois operadores básicos, a erosão e a dilatação. A erosão consiste
+na retirada de pontos indesejáveis da imagem, enquanto a dilatação é
+a propagação de um determinado ponto para áreas ao seu redor.
+
+\hspace*{1.25cm}Neste trabalho, a morfologia matemática é utilizada
+para a aplicação de efeitos como erosão e dilatação no vídeo em
+edição no M-FIT.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/morfologia_elementos_estruturantes.png}
+ \caption{Elemento estruturante: a) Cruz; b) Quadrado; c) Hexágono. }
+ Fonte: \cite{NOGUEIRA_2002}, p.79
+ \label{img:morfologia_elementos_estruturantes}
+\end{figure}
+
+\hspace*{0.65cm}Ambas as operações são sempre baseadas em um
+elemento estruturante que é um conjunto pequeno definido e conhecido
+(forma, tamanho) que é sempre comparado a um conjunto desconhecido
+da imagem. O elemento estruturante pode ser de vários tipos conforme
+observado na Figura \ref{img:morfologia_elementos_estruturantes}. A
+boa escolha de um elemento estruturante está diretamente ligada à
+qualidade dos resultados das operações. Na Figura
+\ref{img_morfologia_erosao} - b, pode ser observada a aplicação de
+uma erosão em uma imagem:
+
+\begin{figure}[h|top]
+\centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/morfologia_original.png}
+        (a)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/morfologia_erosao.png}
+        (b)
+    \end{minipage}
+    \caption{a) Imagem Original; b) Imagem Erodida}
+    Fonte: Autor ``adaptado de'' Batman - O Cavaleiro das Trevas.
+    \label{img_morfologia_erosao}
+\end{figure}
+
+\hspace*{0.65cm}Segundo \cite{NOGUEIRA_2002}, a erosão de um
+elemento é dada por:
+
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:erosao}
+ [ \varepsilon_B(f)](x)  = \min{b \in B} f(x + b) - B(b)
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde $f$ é a região da imagem a ser erodida e $B$ é
+o elemento estruturante.
+
+\hspace*{0.65cm}Como é possível observar na Figura
+\ref{img_morfologia_erosao} - b, uma imagem erodida resulta em uma
+imagem com seus pontos escuros expandidos, enquanto os claros são
+diminuídos em relação à imagem original.
+
+\begin{figure}[ht]
+\centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/morfologia_original.png}
+        (a)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/morfologia_dilatacao.png}
+        (b)
+    \end{minipage}
+    \caption{a) Imagem Original; b) Imagem Dilatada.}
+    Fonte: Autor``adaptado de'' Batman - O Cavaleiro das Trevas.
+    \label{img_morfologia_dilatacao}
+\end{figure}
+
+\hspace*{0.65cm}A dilatação, segundo \cite{NOGUEIRA_2002}, é dada
+por:
+
+\begin{large}
+\begin{center}
+\begin{equation}
+\label{eq:dilatacao} [ \varepsilon_B(f)](x)  = \max{b \in B} f(x +
+b)
+\end{equation}
+\end{center}
+\end{large}
+
+\hspace*{0.65cm}Onde $f$ é a região da imagem a ser dilatada e $B$ é
+o elemento estruturante.
+
+\hspace*{0.65cm}Como é possível observar na Figura
+\ref{img_morfologia_dilatacao} - b, ao contrário da imagem erodida,
+uma imagem dilatada tem seus pontos claros expandidos, enquanto os
+escuros são diminuídos em relação à imagem original.
+
+\hspace*{0.65cm}Neste trabalho, a Morfologia Matemática será
+utilizada para demonstrar a aplicação de efeitos visuais no vídeo.
+
+\subsection{Segmentação de Imagens \label{segmentacao_de_imagens}}
+
+\hspace*{1.25cm}Em visão computacional, segmentação é o processo de
+dividir uma imagem em múltiplas regiões, com a intenção de
+subdividir a imagem em areas de interesse, ou simplesmente
+modificá-las, ambos a fim de facilitar uma análise posterior. Em
+imagens monocromáticas algoritmos de segmentação são baseados em uma
+das propriedades básicas de valores de níveis de cinza:
+descontinuidade (detecção de bordas) e similaridade (agrupamento de
+regiões homogêneas).
+
+\begin{figure}[ht] \centering
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/seg_limiar_original.png}
+        (a)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/seg_limiar_50.png}
+        (b)
+    \end{minipage}
+    \par
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/seg_limiar_100.png}
+        (c)
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{7.0cm}
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/seg_limiar_150.png}
+        (d)
+    \end{minipage}
+    \caption{a) Figura original; b) Limiar 150; c) Limiar 100; d) Limiar 50}
+    Fonte: Autor ``adaptado de'' OpenCV Samples.
+    \label{img_limiar}
+\end{figure}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.65\linewidth]{imagens/seg_histograma.png}
+ \caption{Exemplo de limiar com histograma.}
+ \label{img_seg_histograma} Fonte: Autor.
+\end{figure}
+
+\hspace*{0.65cm}Na descontinuidade, o objetivo é particionar a
+imagem tendo como regra mudanças bruscas nas escalas de cinza. A
+similaridade baseia-se na limiarização (\cite{BASTOS_2006}. A
+limiarização ou binarização de uma imagem é dada a partir do nível
+de cinza de seus pixels. Tal processo é dado pela definição de um
+limiar $T$ no histograma da imagem e comparação dos níveis de tom de
+cinza dos pixels com o limiar $T$. Valores que forem menores que o
+limiar, têm seus valores de níveis de cinza aproximados para $255$,
+tornando-se brancos, e aqueles que tiverem níveis de cinza maiores
+que o limiar, têm seus valores em níveis de cinza aproximados para
+0, tornando-se pretos.
+
+\hspace*{0.65cm}A Figura \ref{img_seg_histograma} mostra um exemplo
+de histograma com limiar definido.
+
+\hspace*{0.65cm}Como pode ser observado nos exemplos das Figuras
+\ref{img_limiar} - b, \ref{img_limiar} - c e \ref{img_limiar} - d
+dependendo do limiar escolhido o resultado se altera. Quanto menor o
+valor do limiar mais pixels terão seus níveis de cinza aproximados
+de 255, deixando a imagem com mais pontos brancos do que pretos. A
+recíproca também é verdadeira.
+
+\hspace*{0.65cm}Existem diversas formas de se estimar o limiar, os
+mais conhecidos são: \\limiar iterativo \cite{YANG_2006}, por
+entropia não-extensiva \cite{RODRIGUEZ} e limiar adaptativo
+\cite{ILYA_2001}.
+
+\hspace*{0.65cm}Neste trabalho, técnicas de segmentação de imagens
+serão utilizadas para identificar a área de interesse em vídeos que
+estejam no formato \textit{widescreen}, ou seja, para realizar a
+extração das tarjas pretas, pois estas podem invalidar os resultados
+obtidos.
+
+\section{Processamento de Alto Nível \label{alto_nivel}}
+
+\subsection{Método Baseado em Entropia \label{entropia}}
+
+\hspace*{1.25cm}Nascida na termodinâmica, a entropia tem como
+objetivo, medir o grau de desordem de um sistema, em outras
+palavras, determinar o quanto instável se encontra um determinado
+estado de um sistema.
+
+\hspace*{0.65cm}Como visto em \cite{MENDELSSOHN_1962}, o conceito de
+instabilidade, ou desordem de um sistema termodinâmico está
+associado à quantidade de troca de calor entre um estado A e outro
+estado B. Isto porque a desordem de um sistema aumenta ou diminui
+conforme for o ganho ou perda de calor na passagem de um estado para
+outro.
+
+\hspace*{0.65cm}Por exemplo, para passar a água do estado (tomada)
+sólido para o estado líquido é necessário que o estado sólido receba
+uma determinada quantidade de calor $\Delta Q$. Quando inicia-se o
+processo de aquecimento do cubo de gelo (transição), suas moléculas,
+inicialmente estáveis, passam a ter um aumento da energia cinética,
+conseqüentemente tornando o sistema (vídeo) mais instável. Esta
+movimentação pode ser considerada como desordem, sendo assim, é
+possível dizer que no estado líquido, a entropia do sistema é maior
+do que quando o sistema se encontra no estado sólido.
+
+\hspace*{0.65cm}O método baseado em entropia é um método não muito
+utilizado e neste trabalho este método não será aplicado.
+
+\hspace*{0.65cm}Uma abordagem sobre este assunto pode ser encontrado
+em \cite{MENDELSSOHN_1962}.
+
+
+
+%\begin{large}
+%\begin{center}
+%\begin{equation}
+%\label{eq:entropia} Sj = - \sum_{i=0}^{n}{Pi * ln(Pi)}
+%\end{equation}
+%\end{center}
+%\end{large}

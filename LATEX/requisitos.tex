@@ -1,0 +1,167 @@
+\chapter{ESPECIFICAÇÃO DE REQUISITOS \label{requisitos}}
+
+\section{Requisitos de Negócio \label{RQN}}
+
+\subsection{Automatização do processo de detecção de transições\label{RQN01}}
+
+\hspace*{1.25cm}Realizar a detecção de transições de um vídeo
+fornecido pelo usuário, tornando o processo automático, sem a
+necessidade de intervenções humanas.
+
+\section{Requisitos de Usuário \label{RQU}}
+
+\subsection{Aplicação de efeitos \label{RQU07}}
+
+\hspace*{1.25cm}Para aplicar um efeito visual, o sistema deve
+permitir ao usuário que o mesmo seja aplicado em todo o vídeo, ou
+somente em uma determinada tomada, sendo possível ainda, escolher
+entre aplicar em apenas uma, ou em diversas tomadas, cabendo ao
+sistema realizar a aplicação do efeito conforme as opções
+selecionadas pelo usuário.
+
+\subsection{Agrupamento de efeitos possíveis \label{RQU06}}
+
+\hspace*{1.25cm}O sistema fornecerá ao usuário, em uma área centralizada,
+ferramentas para aplicação de efeitos simples de edição de imagens.
+
+\subsection{Carregamento do vídeo \label{RQU01}}
+
+\hspace*{1.25cm}Ao carregar o vídeo no sistema, o usuário poderá
+escolher entre realizar a detecção de transições durante o
+carregamento ou posteriormente, dando ao usuário a flexibilidade de
+realizar a detecção das transições no momento em que desejar.
+
+\subsection{Controladores de reprodução de vídeo \label{RQU12}}
+
+\hspace*{1.25cm}A aplicação fornecerá ao usuário, controles de
+reprodução de vídeo, permitindo ao usuário ter uma prévia deste após
+a sua edição.
+
+\subsection{Drag and Drop \label{RQU11}}
+
+\hspace*{1.25cm}Um efeito de edição de vídeo, uma alteração do
+esquema de cores por exemplo, poderá ser aplicado no vídeo
+simplesmente pela ação de ``drag and drop'' (arrastar e soltar). O
+usuário escolhe a ferramenta da box de efeitos a ser utilizada e a
+arrasta sobre a tomada que desejar editar.
+
+\subsection{Enumeração de transições \label{RQU08}}
+
+\hspace*{1.25cm}Para facilitar a navegação e localização do usuário
+perante o vídeo, as transições do vídeo serão enumeradas conforme a
+detecção de transições ocorrer, onde a transição número 0 será
+sempre o início do vídeo. Desta forma, ficam enumeradas as tomadas
+do vídeo, onde a primeira vai da transição número 0 (início do
+vídeo), até a ocorrência da transição número 1, e assim por diante.
+
+\subsection{Intervenção manual \label{RQU09}}
+
+\hspace*{1.25cm}Caso haja necessidade, os pontos de transição
+detectados pelo sistema poderão ser modificados pelo usuário
+manualmente. Para isso o usuário será capaz de alterar a posição da
+transição na lista de transições, ou até mesmo deletá-la.
+
+\subsection{Lista de transições \label{RQU04}}
+
+\hspace*{1.25cm}Realizada a detecção e identificação das transições
+do vídeo, estas deverão ser listadas para o usuário em uma pequena
+box da janela principal do sistema. Tais transições serão enumeradas
+para facilitar na navegação pelo vídeo.
+
+\subsection{\textit{Preview} de \textit{frames} \label{RQU03}}
+
+\hspace*{1.25cm}O sistema deverá disponibilizar ao usuário uma
+prévia do \textit{frame} em que o cursor da \textit{timeline} estiver posicionando, a
+qual será exibida na janela principal do sistema.
+
+\subsection{Seleção de transições \label{RQU05}}
+
+\hspace*{1.25cm}Ao selecionar uma transição da lista de transições,
+o \textit{frame} em que foi indicada a sua ocorrência deverá ser mostrado na
+janela onde é passado o vídeo, assim como a tomada que a transição
+dá início deverá ser marcada na \textit{timeline}. Caso o usuário selecione
+mais de uma transição, todas as tomadas correspondentes deverão ser
+marcadas na \textit{timeline}.
+
+\subsection{\textit{Timeline} \label{RQU02}}
+
+\hspace*{1.25cm}Ao realizar o carregamento do vídeo, será
+disponibilizada para o usuário a visualização de uma ``\textit{timeline}'' do
+vídeo exibindo seus \textit{frames} de forma seqüencial e sem nenhuma
+identificação, ou com as suas transições marcadas e identificadas,
+no caso da detecção das transições ter sido executada junto do
+carregamento do vídeo.
+
+\section{Requisitos de Sistema \label{RQS}}
+
+\subsection{Arquivo de controle do projeto \label{RQS14}}
+
+\hspace*{1.25cm}Todo o projeto será salvo em um arquivo XML, o qual
+deverá conter todas as informações necessárias para que o sistema
+consiga retomar a edição do vídeo sem intervenção nenhuma do
+usuário, partindo do ponto exato onde o usuário interrompeu a
+edição. O arquivo deverá conter informações como: nome do projeto,
+diretório de trabalho do projeto, nome e caminho completo do vídeo
+carregado, pontos onde houveram transições no vídeo etc.
+
+\subsection{Classificação das transições \label{RQS12}}
+
+\hspace*{1.25cm}A aplicação deverá classificar automaticamente as
+transições detectadas. Tal classificação será dividida em:
+\begin{itemize}
+    \item Corte
+    \item Dissolve
+    \item Fade-in
+    \item Fade-out
+\end{itemize}
+
+\subsection{Detecção de transições \label{RQS11}}
+
+\hspace*{1.25cm}O sistema deverá detectar automaticamente o máximo
+possível das transições presentes no vídeo.
+
+\subsection{Compatibilidade de Sistema Operacional \label{RQS06}}
+
+\hspace*{1.25cm}O sistema deverá ser compatível com sistema
+operacional Windows.
+
+\subsection{Limiar\label{RQS13}}
+
+\hspace*{0.65cm}Para as operações que exijam um limiar, caso o
+usuário não forneça nenhum valor, o sistema irá utilizar seus
+valores padrões, por exemplo, durante o processo de detecção de
+transições do tipo corte, serão consideradas cortes somente as retas
+verticais que ultrapassarem 45\% da altura total do Ritmo Visual.
+
+\subsection{Localização de arquivo \label{RQS01}}
+
+\hspace*{1.25cm}O sistema deverá ser capaz de abrir arquivos que
+estejam em qualquer tipo de mídia de armazenamento, pen drives, HD,
+CD´s, entre outros, assim como permitir que o usuário salve seus
+projetos em qualquer local.
+
+\subsection{Montagem do mapa de bordas \label{RQS03}}
+
+\hspace*{1.25cm}Aplicar o operador de Canny sobre o Ritmo Visual,
+obtendo assim o seu mapa de bordas.
+
+\subsection{Montagem do Ritmo Visual \label{RQS02}}
+
+\hspace*{1.25cm}Aplicação de cálculos para extração da diagonal
+principal de cada \textit{frame} do vídeo, afim de criar uma simplificação do
+mesmo.
+
+\subsection{OpenCV \label{RQS08}}
+
+\hspace*{1.25cm}Necessária a inclusão das bibliotecas do OpenCV,
+biblioteca específica para aplicações de funções de PDI.
+
+\subsection{QT \label{RQS09}}
+
+\hspace*{1.25cm}A interface do sistema deverá ser desenvolvida
+através da ferramenta QT.
+
+\subsection{Tipos de arquivo\label{RQS04}}
+
+\hspace*{1.25cm}O sistema deverá ser compatível no mínimo com
+arquivos do tipo ``AVI''.

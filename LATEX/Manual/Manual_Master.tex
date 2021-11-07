@@ -1,0 +1,220 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{a4wide}
+\usepackage[portuguese,english]{babel}
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{epsfig}
+\usepackage[latin1]{inputenc}
+\usepackage{doublespace}
+\usepackage{fancyheadings}
+\usepackage{longtable}
+\usepackage{dropping}
+\usepackage{url}
+\usepackage{subfigure}
+\usepackage[top=3cm,left=3cm,bottom=2cm,right=2cm]{geometry}
+
+
+%\usepackage{apalike}
+\newcommand{\figr}[1]{Figura~\ref{#1}}
+\newcommand{\eqt}[1]{Eq.~(\ref{#1})}
+\newcommand{\eqts}[2]{Eq.~(\ref{#1})~e~(\ref{#2})}
+\newcommand{\eqtss}[3]{Eq.~(\ref{#1})~,~(\ref{#2})~e~(\ref{#3})}
+\newcommand{\tab}[1]{Tabela~\ref{#1}}
+
+%comandos para se definir cabeçalhos nas páginas da dissertação
+\pagestyle{fancyplain}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\small\leftmark}}
+\rhead[\fancyplain{}{\small\rightmark}]{\fancyplain{}{\thepage}}
+\cfoot{\fancyplain{\thepage}{}}
+
+%package para reconhecimento de acentuação em português
+\usepackage[latin1]{inputenc}
+
+%package para reconhecimento de português
+\usepackage{babel}
+
+%package para uso de verbatimtab
+%\usepackage{moreverb}
+
+%configuração para numeração de subsubseções
+\setcounter{secnumdepth}{3}
+
+% Frases de efeito no início de cada capítulo
+\newcommand{\epigraph}[2]{%
+  \vspace{1ex}%
+  {\footnotesize%
+   \begin{spacing}{1}
+    \begin{flushright}%
+      \begin{minipage}{.6\textwidth}%
+        #1\\
+      \end{minipage}\\
+      \textit{#2}%
+    \end{flushright}
+    \end{spacing}}%
+  \vspace{1ex}}
+
+
+
+\begin{document}
+
+%-----------------------------------
+% CAPA EM PORTUGUÊS
+%-----------------------------------
+\thispagestyle{empty}
+
+\begin{spacing}{1.0}
+
+\begin{center}
+\begin{large}
+\begin{huge}
+CENTRO UNIVERSITÁRIO DA FEI\\[0.2 cm]
+\end{huge}
+
+\vspace {2 cm}
+
+
+MAURÍCIO KENITI HIROTA\\[0.2 cm]
+
+FABRÍCIO LOPES DE SOUZA\\[0.2 cm]
+
+IVAN SHIGUENORI MACHIDA\\[0.2 cm]
+
+THIAGO MIZUTANI\\[0.2 cm]
+
+Orientador: Prof. D.Sc. Paulo Sérgio Silva Rodrigues \\[0.2 cm]
+\end{large}
+\end{center}
+
+\vspace {2 cm}
+
+\begin{spacing}{1.5}
+\begin{center}
+\begin{huge}
+{\bf MANUAL DE USO - M-FIT}
+\end{huge}
+\end{center}
+\end{spacing}
+
+\vspace {8 cm}
+
+\begin{center}
+\begin{large}
+São Bernardo do Campo \\[0.2 cm]
+2008
+\end{large}
+\end{center}
+
+\end{spacing}
+\newpage
+
+%-----------------------------------
+% CAPA DE APRESENTAÇÃO EM PORTUGUÊS
+%-----------------------------------
+\thispagestyle{empty}
+
+\begin{spacing}{1.0}
+
+\begin{center}
+\begin{large}
+\begin{huge}
+CENTRO UNIVERSITÁRIO DA FEI\\[0.2 cm]
+\end{huge}
+
+\vspace {2 cm}
+
+MAURÍCIO KENITI HIROTA\\[0.2 cm]
+
+FABRÍCIO LOPES DE SOUZA\\[0.2 cm]
+
+IVAN SHIGUENORI MACHIDA\\[0.2 cm]
+
+THIAGO MIZUTANI\\[0.2 cm]
+
+Orientador: Prof. D.Sc. Paulo Sérgio Silva Rodrigues \\[0.2 cm]
+\end{large}
+\end{center}
+
+\vspace {2 cm}
+
+\begin{spacing}{1.5}
+\begin{center}
+\begin{huge}
+{\bf MANUAL DE USO - M-FIT}
+
+\end{huge}
+\end{center}
+\end{spacing}
+
+\vspace {2 cm}
+
+\begin{flushright}
+\begin{minipage}[t]{8.5 cm}
+Trabalho de Conclusão de Curso, apresentado no Centro Universitário
+da FEI, como parte dos requisitos necessários para obtenção do
+título de Bacharel em Ciências da Computação, orientado pelo
+professor Prof. D.Sc. Paulo Sérgio Silva Rodrigues.
+\end{minipage}
+\end{flushright}
+
+\vspace {2 cm}
+
+\begin{center}
+\begin{large}
+São Bernardo do Campo \\[0.2 cm]
+2008
+\end{large}
+\end{center}
+
+\end{spacing}
+\newpage
+
+
+%-----------------------------------
+% DOCUMENTAÇÃO DO TRABALHO
+%-----------------------------------
+
+\renewcommand{\baselinestretch}{1.3}
+
+\pagenumbering{roman}
+%\setlength{\voffset}{0.0in}
+
+%\begin{spacing}{1.0}
+%\include{resumo}
+%\end{spacing}
+
+%\begin{spacing}{1.0}
+%\include{abstract}
+%\end{spacing}
+
+\selectlanguage{portuguese}
+
+\begin{spacing}{1.0}
+\renewcommand{\contentsname}{Sumário}\tableofcontents
+%\listoffigures
+%\listoftables
+\end{spacing}
+
+\clearpage
+
+\setcounter{page}{0} \pagenumbering{arabic}
+
+% Aqui entram todos os tópicos
+\begin{spacing}{1.5}
+
+\include{menus_sistema}
+\include{funcionalidades}
+
+\end{spacing}
+
+\appendix
+
+%\include{apendice}
+
+%Bibliografia
+\begin{spacing}{1.0}
+\bibliographystyle{apalike}
+%\bibliographystyle{abbrv}
+\bibliography{referencias}
+\end{spacing}
+
+\end{document}

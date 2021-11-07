@@ -1,0 +1,241 @@
+<ui version="4.0" >
+ <class>transitionEditWidget</class>
+ <widget class="QWidget" name="transitionEditWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>336</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>450</width>
+    <height>336</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>450</width>
+    <height>336</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Editar Transicao</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset>
+    <normaloff>../Interface/Icons/logo.png</normaloff>../Interface/Icons/logo.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item rowspan="16" row="1" column="0" colspan="4" >
+    <widget class="QFrame" name="frame" >
+     <property name="frameShape" >
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="labelPreview" >
+        <property name="frameShape" >
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="frameShadow" >
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="text" >
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="5" >
+    <widget class="QPushButton" name="backButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>&lt;&lt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="5" >
+    <widget class="QPushButton" name="forwardButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>>></string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="5" >
+    <widget class="QPushButton" name="changeButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Modificar</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="5" >
+    <widget class="QPushButton" name="deleteButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Remover</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="5" >
+    <widget class="QPushButton" name="okButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Ok</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="5" >
+    <widget class="QPushButton" name="cancelButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item rowspan="2" row="13" column="5" >
+    <widget class="QLabel" name="label_3" >
+     <property name="minimumSize" >
+      <size>
+       <width>105</width>
+       <height>14</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>105</width>
+       <height>14</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Posição transição: </string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="5" >
+    <widget class="QLabel" name="labelCurrentPos" >
+     <property name="frameShape" >
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Raised</enum>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="5" >
+    <widget class="QLabel" name="label_2" >
+     <property name="minimumSize" >
+      <size>
+       <width>105</width>
+       <height>14</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>105</width>
+       <height>14</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Posição Corrente:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="5" >
+    <widget class="QLabel" name="labelTransitionName" >
+     <property name="frameShape" >
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Raised</enum>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="5" >
+    <widget class="QLabel" name="label" >
+     <property name="minimumSize" >
+      <size>
+       <width>105</width>
+       <height>14</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>105</width>
+       <height>14</height>
+      </size>
+     </property>
+     <property name="text" >
+      <string>Tipo Transição:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="5" >
+    <widget class="QLabel" name="labelFramePos" >
+     <property name="frameShape" >
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Raised</enum>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,318 @@
+\chapter{Funcionalidades do M-FIT\label{introducao}}
+
+\hspace*{1.25cm}Neste capítulo será explicado todas as funcionalidades do MFIT.
+
+\section{Carregar um Vídeo\label{carrega_video}}
+
+\hspace{1.25cm}Nesta seção detalharemos os passos necessários para
+se carregar um Vídeo.
+
+\begin{enumerate}
+
+\item{Abra o MFIT (Figura \ref{img:mfit_aberto})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/mfit_aberto.png}
+ \caption{MFIT Aberto sem Vídeo carregado.}
+ Fonte: Autor.
+ \label{img:mfit_aberto}
+\end{figure}
+
+\item{Clique com o botão direito no menu ``Arquivo'', opção ``Carregar Vídeo''.
+Se preferir, pressione as teclas Ctrl+Shif+O (Figura \ref{img:carregar2}). }
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/carregar2.png}
+ \caption{Menu ``Arquivo'', opção ``Carregar Vídeo'' .}
+ Fonte: Autor.
+ \label{img:carregar2}
+\end{figure}
+
+\item{Na janela que abrirá, selecione um Vídeo válido (com extensão .AVI) e de um duplo clique (Figura \ref{img:carregar3}). }
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/carregar3.png}
+ \caption{Selecionando um Vídeo válido.}
+ Fonte: Autor.
+ \label{img:carregar3}
+\end{figure}
+
+\item{Após alguns instantes o vídeo estará aberto, e sua timeline estará montada.
+Note que uma janela se abrirá, questionando se o processo de detecção de transições deve ser iniciado.
+Por hora, clique em cancelar (Figura \ref{img:carregar4}). }
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/carregar4.png}
+ \caption{Vídeo carregado e janela questionando o processo de detecção.}
+ Fonte: Autor.
+ \label{img:carregar4}
+\end{figure}
+
+\item{Processo finalizado, o Vídeo está pronto para se efetuar todas as operações possíveis (Figura \ref{img:carregar5}). }
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/carregar5.png}
+ \caption{Fim do processo.}
+ Fonte: Autor.
+ \label{img:carregar5}
+\end{figure}
+
+\end{enumerate}
+
+\section{Detecção de transições\label{carrega_video}}
+
+\hspace{1.25cm}Nesta seção detalharemos os passos necessários para
+se detectar as transições de um Vídeo.
+
+\hspace{0.65cm}Para esta funcionalidade temos dois caminhos:
+
+\begin{enumerate}
+\item{À partir do carregamento do Vídeo}
+
+\subitem{ Ao chegar no passo 4 do processo de carregamento de Vídeo
+(Seção \ref{carrega_video}), existe a opção de aceitar a detecção de
+todas as transições. Para isso, basta clicar em ``OK'' quando o
+sistema questionar sobre a detecção. Com isso o processo de detecção
+de todas as transições se iniciará. ( Figura \ref{img:carregar4} )}
+
+\item{Após o carregamento do Vídeo}
+
+\subitem{ Após realizar todos os passos do processo de carregamento do Vídeo (Seção \ref{carrega_video}),
+os botões de detecção de transição estarão habilitados. Escolha a detecção que deseja e pressione o botão (Figura \ref{img:carregar5} )}
+
+\item{ Após escolher um dos passos acima, o sistema realizará a detecção de transições, com isso as transições ficarão delimitadas
+na Timeline, e a lista de transições será preenchida (Figura
+\ref{img:transicoes1}).}
+
+\end{enumerate}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.8\linewidth]{imagens/transicoes1.png}
+ \caption{Transições Detectadas.}
+ Fonte: Autor.
+ \label{img:transicoes1}
+\end{figure}
+
+\section{Configurações da Detecção \label{config_detecta}}
+
+\hspace*{1.25cm}Para realizar a detecção de transições, o usuário
+tem como opção alterar algumas configurações com o intuito de
+melhorar a performance da detecção.
+
+\hspace{0.65cm}A Figura \ref{img:configuracoes} mostra a janela de
+configurações que é mostrada quando o usuário acessa o menu de
+configurações.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.8\linewidth]{imagens/configuracoes.png}
+ \caption{Janela de configurações.}
+ Fonte: Autor.
+ \label{img:configuracoes}
+\end{figure}
+
+\hspace*{0.65cm}No canto esquerdo desta janela, encontra-se um menu
+que dá acesso às configurações específicas pra cada tipo de
+transição. No entanto só estão disponíveis nesta versão, as
+configurações para detecção do tipo corte.
+
+\hspace*{0.65cm}Cada item é explicado a seguir:
+
+\begin{enumerate}
+
+\item{\textbf{Porcentagem:}
+Aqui é possível alterar o valor do limiar para definição de quais
+bordas geradas através da aplicação do Filtro de Canny sobre o Ritmo
+Visual serão consideradas cortes. O valor aqui definido corresponde
+à porcentagem da altura do Frame. Portanto quanto maior for esta
+porcentagem, maiores deverão ser as bordas para que sejam
+consideradas cortes. Recomenda-se não utilizar valores muito baixos
+para que a quantidade de falsas detecções aumente.}
+
+\item{\textbf{Limiar Mínimo:}
+Este limiar corresponde ao limiar mais baixo para o processo de
+limiarização dupla, ou histerese. Quanto mais baixo for este limiar,
+maior será o número de bordas detectadas, causando um aumento do
+número de falsas detecções. No entanto, para cada tipo de vídeo há
+uma configuração que irá gerar resultados mais satisfatórios.}
+
+\item{\textbf{Limiar Máximo:}
+Este limiar corresponde ao limiar mais alto para o processo de
+limiarização dupla, ou histerese. Seu comportamento é semelhante ao
+do limiar mínimo, sendo que para cada tipo de vídeo há uma
+configuração que gera melhores resultados.}
+
+\end{enumerate}
+
+\section{Aplicação de Efeito\label{carrega_video}}
+
+\hspace{1.25cm}Nesta seção serão detalhados os passos necessários
+para se aplicar um efeito no Vídeo.
+
+\hspace{0.65cm}Como pré-requisito necessitamos de um Vídeo
+carregado.
+
+\begin{enumerate}
+
+\item{Com o Vídeo aberto, selecione um dos efeitos da lista de efeitos a direita (Figura \ref{img:efeitos1})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/efeitos1.png}
+ \caption{Lista de Efeitos.}
+ Fonte: Autor.
+ \label{img:efeitos1}
+\end{figure}
+
+\item{Para aplicar o efeito, clique no efeito desejado e arraste para a posição o vídeo. Note que o sistema sinalizará
+    as transições onde este efeito será aplicado .(Figura \ref{img:efeitos2})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/efeitos2.png}
+ \caption{Arrastando o efeito desejado.}
+ Fonte: Autor.
+ \label{img:efeitos2}
+\end{figure}
+
+\item{Caso o desejado seja aplicar em várias transições, no momento que estiver arrastando, segure a tecla CTRL (Figura \ref{img:efeitos3}).}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/efeitos3.png}
+ \caption{Arrastando para múltiplas transições.}
+ Fonte: Autor.
+ \label{img:efeitos3}
+\end{figure}
+
+\item{Com isso o efeito vai ser aplicado no intervalo de transições desejados, note que a lista de efeitos conta agora com uma entrada, e a visualização
+    do vídeo já contem o efeito aplicado (Figura \ref{img:efeitos4})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/efeitos4.png}
+ \caption{Efeito aplicado.}
+ Fonte: Autor.
+ \label{img:efeitos4}
+\end{figure}
+
+\end{enumerate}
+
+\section{Renderizar Vídeo\label{carrega_video}}
+
+\hspace{1.25cm}Nesta seção detalharemos os passos necessários para
+se renderizar o Vídeo.
+
+\hspace{0.65cm}Como pré-requisito temos que ter um Vídeo carregado.
+
+\begin{enumerate}
+
+\item{Após aplicarmos efeitos em um Vídeo, é hora de renderiza-lo para verificarmos o resultado final.
+    Clique na opção ``Renderizar'' do menu ``Arquivo'' (Figura \ref{img:render1})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/render1.png}
+ \caption{Opção ``Renderizar'' do menu ``Arquivo''.}
+ Fonte: Autor.
+ \label{img:render1}
+\end{figure}
+
+\item{Na janela que se abriu, selecione um nome para o Vídeo e pressione ``OK'' (Figura \ref{img:render2})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/render2.png}
+ \caption{Janela de escolha do nome do Vídeo.}
+ Fonte: Autor.
+ \label{img:render2}
+\end{figure}
+
+\item{Por fim, quando o MFIT voltar para sua janela principal, o video já estará salvo no local selecionado (Figura \ref{img:render3})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.3\linewidth]{imagens/render3.png}
+ \caption{Vídeo renderizado.}
+ Fonte: Autor.
+ \label{img:render3}
+\end{figure}
+
+\end{enumerate}
+
+\section{Editar Transição\label{carrega_video}}
+
+\hspace{1.25cm}Nesta seção detalharemos os passos necessários para
+se editar uma Transição.
+
+\hspace{0.65cm}Como pré-requisito temos que ter um Vídeo carregado,
+e suas transições detectadas.
+
+\begin{enumerate}
+
+\item{De um duplo clique na transição desejada, uma nova janela se abrirá (Figura \ref{img:edit1})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/edit1.png}
+ \caption{Janela de edição de transições.}
+ Fonte: Autor.
+ \label{img:edit1}
+\end{figure}
+
+\item{Para modificar o ponto da transição:}
+\subitem{Clique nos botões ``$<<$'' ou ``$>>$'' para navegar no vídeo (Figura \ref{img:edit2})}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/edit2.png}
+ \caption{Navegando no Vídeo.}
+ Fonte: Autor.
+ \label{img:edit2}
+\end{figure}
+
+\subitem{No momento em que desejar definir a posição corrente como a
+posição da transição, clique em ``Modificar'' (Figura
+\ref{img:edit3}). Note que o valor da ``Posição Transição'' assumirá
+o valor da ``Posição Corrente''.}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/edit3.png}
+ \caption{Modificando a posição da transição.}
+ Fonte: Autor.
+ \label{img:edit3}
+\end{figure}
+
+\subitem{Clique em ``Ok'' para confirmar as alterações.}
+
+\item{Para remover o da transição:}
+\subitem{Clique no botão ``Remover'' }
+\subitem{Clique em ``Ok'' para confirmar as alterações}
+
+\item{Após clicar em ``Ok'', o sistema aplicará as alterações.
+Na Figura \ref{img:edit4} removemos a transição selecionada, e na Figura \ref{img:edit5}, modificamos seu ponto de ocorrência.}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/edit4.png}
+ \caption{Transição Removida.}
+ Fonte: Autor.
+ \label{img:edit4}
+\end{figure}
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=0.7\linewidth]{imagens/edit5.png}
+ \caption{Ponto da Transição modificado.}
+ Fonte: Autor.
+ \label{img:edit5}
+\end{figure}
+
+\end{enumerate}

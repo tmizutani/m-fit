@@ -1,0 +1,244 @@
+\chapter{METODOLOGIA \label{metodologia}}
+
+\hspace*{1.25cm}Neste Capítulo, serão definidas as metodologias a serem utilizada
+para a realização da detecção de transições.
+
+\begin{figure}[h|top]
+    \centering
+    \includegraphics[width=1.0\linewidth]{imagens/metodologia.png}
+    \caption{Diagrama esquemático da metodologia proposta.}
+    \label{img_metodologia} Fonte: Autor.
+\end{figure}
+
+\hspace*{0.65cm}A Figura \ref{img_metodologia} mostra um esquema
+geral da metodologia proposta neste trabalho, que consiste em: a
+partir de um dado vídeo de entrada o sistema realizará a detecção de
+suas transições (corte/\textit{fade}/\textit{dissolve}), sendo que para cada tipo de
+transição, será aplicada uma metodologia diferente, as quais serão
+detalhadas posteriormente. Após estes processos o vídeo poderá ser
+editado, com aplicação de efeitos visuais.
+
+\section{Cortes \label{met_cortes}}
+
+\begin{figure}[h|top]
+    \centering
+    \includegraphics[width=1.0\linewidth]{imagens/metodologia_cortes.png}
+    \caption{Metodologia utilizada para a detecção de Cortes.}
+         \label{img_metcortes} Fonte: Autor.
+\end{figure}
+
+\hspace*{1.25cm}A Figura \ref{img_metcortes} representa a metodologia utilizada para
+a detecção de transições do tipo Corte:
+
+\begin{enumerate}
+
+    \item{\textbf{Vídeo:} É feita a entrada do vídeo no qual será feita a detecção dos cortes.}
+
+    \item{\textbf{Montagem do Ritmo Visual por sub-amostragem:} Para realizar a detecção das transições,
+    o sistema irá gerar uma imagem 2D que representa o Ritmo Visual do
+    vídeo, como definido na Seção \ref{ritmo_visual}.
+
+    \hspace*{0.65cm}Este processo se dá de acordo com os seguintes passos:
+
+    \begin{enumerate}
+        \item{Obtenção do \textit{Frame};}
+        \item{Conversão do \textit{Frame} para tons de cinza;}
+        \item{Cálculo da Diagonal Principal deste \textit{Frame}.}
+    \end{enumerate}
+
+    \hspace*{0.65cm}Tais passos se repetem do primeiro, até o último \textit{frame} do vídeo.}
+
+    \item{\textbf{Segmentação de Imagem - Extração da área de interesse:} Para vídeos que estejam no
+    formato \textit{widescreen}, será realizada a extração da área de interesse (área do vídeo), para
+    que não haja interferência nos resultados por parte das bordas pertencentes ao \textit{widescreen}. }
+
+    \item{\textbf{Detecção de Bordas - Operador Canny:} Será aplicado o operador de Canny para
+    realizar a detecção das bordas. Como visto na Seção
+    \ref{deteccao_de_bordas}, com a aplicação deste operador, é possível
+    obter o mapa de bordas do Ritmo Visual, o qual irá mostrar a
+    localização de possíveis transições de cortes no vídeo.}
+
+    \item{\textbf{Mapa de Bordas:} Gerado com a aplicação do Operador Canny no RV, o mapa de bordas possibilitará a definição dos pontos
+    onde há a ocorrência dos cortes.}
+
+    \item{\textbf{Limiar de corte e contagem de pontos:} Gerado o mapa de bordas, será necessário determinar quais bordas
+    serão consideradas transições de cortes e quais serão ignoradas pelo
+    fato de pertencerem a objetos da imagem. Tal processo será realizado
+    através da contagem de pontos pertencentes às retas verticais
+    detectadas. Quanto maior for este número, maior a possibilidade da
+    borda estar representando um corte. Para isso, define-se um limiar, o
+    que possibilita realizar a classificação entre aquilo que representa
+    uma borda gerada por um objeto, e daquilo que representa uma transição de
+    corte.}
+
+    \item{\textbf{Validação dos pontos encontrados:} Neste ponto o sistema
+    verifica se o ponto apontado como transição de corte não se trata de um \textit{fade}
+    através da análise da média da luminância dos próximos \textit{frames} e dos \textit{frames} anteriores.
+    Se esta for muito baixa, significa que os próximos \textit{frames} ou os \textit{frames} anteriores são pretos, ou bastante
+    escuros, o que torna alta a probabilidade destes \textit{frames} serem pertencentes ao início ou final de um \textit{fade}.
+    Além disso, é realizado o cálculo da diferença entre a média da luminância
+    dos dois próximos \textit{frames} e a média da luminância dos dois \textit{frames} anteriores. Se esta for nula, ou muito baixa,
+    há grande chance do sistema ter detectado uma borda no Ritmo Visual gerada por um objeto de cena.
+    Caso ocorra um destes casos, o ponto será ignorado.}
+
+    \item{\textbf{Transições:}
+    No final deste processo, estarão identificadas as transições do vídeo
+    do tipo corte.}
+\end{enumerate}
+
+
+\section{Fade \label{met_fade}}
+
+\begin{figure}[h|top]
+    \centering
+    \includegraphics[width=1.0\linewidth]{imagens/metodologia_fades.png}
+    \caption{Metodologia utilizada para a detecção de \textit{Fade}.}
+    \label{img_metfades} Fonte: Autor.
+\end{figure}
+
+\hspace*{1.25cm}Como visto na Seção \ref{ed_fadein}, o \textit{fade-in} é uma
+transição que parte de tomadas mais escuras para tomadas mais
+claras, enquanto o \textit{fade-out}, visto na Seção \ref{ed_fadeout}, possui
+um efeito inverso, partindo de tomadas mais claras para tomadas mais
+escuras.
+
+\hspace{1.25cm}O processo para detecção de transições do tipo
+\textit{fade} será:
+
+\begin{enumerate}
+    \item{\textbf{Vídeo:} É feita a entrada do vídeo no qual será realizada a detecção dos \textit{Fades}.}
+
+    \item{\textbf{Ritmo Visual por Histograma (RVH):} A partir do vídeo de entrada, cria-se uma simplificação
+    do mesmo chamada Ritmo Visual por Histograma (Seção
+    \ref{ritmo_visual_histograma}).
+
+    O processo para criar um RVH possui os seguintes passos:
+    \begin{enumerate}
+    \item{Obtenção do \textit{Frame};}
+    \item{Converte \textit{Frame} para tons de cinza;}
+    \item{Cálculo da Diagonal Principal deste \textit{Frame};}
+    \item{Obtenção do Histograma desta diagonal.}
+    \item{Obtenção da média do Histograma.}
+    \end{enumerate}
+    \hspace*{0.65cm}Tais passos se repetem seqüencialmente do primeiro,
+    até o último \textit{frame} do vídeo.
+
+    \hspace*{0.65cm}Um exemplo de um RVH de uma sequência de vídeo onde
+    ocorre um \textit{fade-in} pode ser visto na Figura \ref{img_met_fadein_rvh}.
+    Onde o eixo $x$ representa os valores de luminância extraídos de
+    cada diagonal do \textit{frame}, e o eixo $y$ representa cada \textit{frame} do vídeo.
+
+    }
+
+    \begin{figure}[h|top]
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/metodologia_fadein_rvh.png}
+        \caption{RVH de uma sequência que contém uma transição do tipo
+        \textit{fade-in}.} \label{img_met_fadein_rvh} Fonte: Adaptado de \cite{FERNANDO_1999}.
+    \end{figure}
+
+    \item{\textbf{Cálculo das Derivadas do RVH:} Obtido o RVH,
+    calcula-se a sua derivada primeira. A partir da função derivada, é
+    possível visualizar o comportamento de um \textit{fade-in}. No momento em que
+    a sequência estiver com seus \textit{frames} mais escuros, a curva se manterá
+    constante. Ao iniciar o processo da transição (clareamento da
+    tomada), ocorrerá uma forte variação na curva, a qual se manterá até
+    o momento em que a luminosidade dos \textit{frames} deixe de variar, fazendo
+    com que o comportamento da curva torne-se estável novamente.}
+
+    \item{\textbf{Análise das Derivadas:}
+
+    \begin{figure}[h|top]
+        \centering
+        \includegraphics[width=1.0\linewidth]{imagens/vrhd_fade_in_out.png}
+        \caption{Trecho do RVH derivado de uma sequência que contém uma transição do tipo \textit{fade-in}, seguida de um \textit{fade-out}. Eixo X representa os \textit{frames} do vídeo, eixo Y representa a derivada da luminância do \textit{frame}}
+          \label{img_vrhd_fade_in_out} Fonte: Autor.
+    \end{figure}
+
+        Tendo as derivadas calculadas, é feita a análise, a fim de encontrar padrões de \textit{fade-in} e \textit{fade-out},
+          os quais podem ser vistos na Figura \ref{img_vrhd_fade_in_out}. Nota-se que em ambos os casos de \textit{fade},
+          fica evidente que um \textit{fade} é representado por um intervalo de variação na derivada do ritmo-visual.
+
+        Então a sequência de derivadas é percorrido ponto a ponto, em busca de intervalos onde a derivada sofre uma variação,
+        como nas Figuras \ref{img_met_fadein_rvh} e \ref{img_vrhd_fade_in_out}.
+        Para que o sistema comece a avalizar um intervalo de variação esta precisa atender as seguintes condições:
+
+        \begin{enumerate}
+        \item{ Sua derivada deverá sofrer uma variação (não deve ser constante); }
+        \item{ Esta variação não deve ser abrupta (Pois pode evidenciar um Corte);}
+        \item{ O ponto anterior não deve ter variação alguma, ou seja, deve ser constante. }
+        \end{enumerate}
+
+        A partir disso, o sistema começa a analisar a variação encontrada.
+
+        O ponto final desta variação é determinado quando a derivada para de variar e torna-se constante novamente.
+
+        Sob posse do intervalo da variação, o sistema verifica as seguintes condições:
+
+        \begin{enumerate}
+        \item{ O intervalo da variação deve conter mais do que 10 \textit{Frames}, visto que valores abaixo deste limiar podem evidenciar um Corte;}
+        \item{ O intervalo não deve ter em seu ponto final uma variação muito abrupta, podendo assim, evidenciar um Corte}
+        \end{enumerate}
+
+        Assim, fica definido que uma variação é de fato um \textit{fade}.
+        Para ser feita a diferenciação entre um \textit{Fade-in} e um \textit{Fade-out}, são adotados os seguintes critérios:
+
+        \begin{enumerate}
+        \item{\textit{Fade-in}: O primeiro ponto da variação é um \textit{Frame} com predominância de cor preta.}
+        \item{\textit{Fade-out}: O último ponto da variação é um \textit{Frame} com predominância de cor preta.}
+        \end{enumerate}
+     }
+
+\end{enumerate}
+
+\section{Dissolve \label{met_dissolve}}
+
+\begin{figure}[h|top]
+    \centering
+    \includegraphics[width=1.0\linewidth]{imagens/metodologia_dissolve.png}
+    \caption{Metodologia utilizada para a detecção de \textit{dissolve}.}
+    \label{img_metdissolve} Fonte: Adaptado de \cite{FERNANDO_1999}.
+\end{figure}
+
+\hspace*{1.25cm}A Figura \ref{img_metcortes} representa a metodologia utilizada para
+a detecção de transições do tipo \textit{Dissolve}:
+
+\begin{enumerate}
+    \item{\textbf{Vídeo:} É feita a entrada do vídeo no qual será feita a detecção das transições do tipo \textit{Dissolve}.}
+
+    \item{\textbf{Cálculo do Ritmo Visual por Histograma:} Para a realização da detecção de transições do tipo
+    \textit{dissolve}, o sistema irá primeiramente gerar o RVH do vídeo.}
+
+    \hspace*{0.65cm}Este processo se dá através dos seguintes passos:
+
+    \begin{enumerate}
+        \item{Obtenção do \textit{Frame};}
+        \item{Converte \textit{Frame} para tons de cinza;}
+        \item{Cálculo da Diagonal Principal deste \textit{Frame};}
+        \item{Obtenção do Histograma desta diagonal;}
+    \end{enumerate}
+
+    \hspace*{0.65cm}Tais passos se repetem seqüencialmente do primeiro,
+    até o último frame do vídeo.
+
+    \item{\textbf{Verifica comportamento do RVH:} Para cada ponto do Ritmo Visual por
+    Histograma, serão verificados os próximos 7 pontos. Se estes pontos possuírem um comportamento
+    crescente ou decrescente, o primeiro deles será considerado um possível local de ocorrência de
+    \textit{Dissolve}.}
+
+    \item{\textbf{Derivada dos possíveis pontos de \textit{Dissolve}:} Será
+    calculada a primeira derivada dos trechos em que há uma possível
+    ocorrência de \textit{Dissolve}, a qual será submetida a um processo de
+    limiarização. Se todas as derivadas de um determinado trecho
+    estiverem abaixo do limiar definido, este será considerado um
+    ponto de ocorrência de \textit{Dissolve}.}
+
+    \item{\textbf{Retirar transições do tipo \textit{fade}:} Será feita a
+    análise da média do nível de luminância dos \textit{Frames} pertencentes
+    ao trecho apontado como \textit{Dissolve}. Caso um deles possua uma média
+    de luminância próxima de zero, significa que o ponto detectado pode não ser um \textit{Dissolve}
+    e sim um \textit{Fade}. Desta forma o ponto é ignorado.}
+
+    \item{\textbf{\textit{Dissolve} detectado:} No final deste processo,
+    estarão identificados os pontos de ocorrência de transições do tipo \textit{Dissolve}.}
+    \end{enumerate}

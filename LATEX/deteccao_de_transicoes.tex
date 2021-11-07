@@ -1,0 +1,41 @@
+\section{Detecção de Transições \label{deteccao_de_transicoes}}
+
+\hspace*{1.25cm}A detecção de transições de um vídeo, tema central
+desta monografia, como já mencionado na Seção \ref{edicao_de_video},
+é o passo principal para o início da manipulação de qualquer amostra
+de vídeos, pois evidenciam marcos de início e fim de cada tomada do
+vídeo.
+
+\hspace*{0.65cm}Para cada tipo de transição existem métodos de maior
+ou menor eficiência. Dentre os métodos de detecção de transições de
+vídeo, a aplicação do Ritmo Visual (visto na Seção seguinte) e
+Morfologia Matemática são as mais utilizadas.
+
+\hspace*{0.65cm}Com a aplicação da morfologia matemática nas amostras de vídeo, é
+possível por exemplo, decompor as imagens em resíduos morfológicos e
+assim, retirar informações sobre as transições existentes. Com a
+aplicação deste método, bons resultados podem ser obtidos em relação
+a transições graduais, porém, o mesmo não ocorre em transições
+bruscas.
+
+\hspace*{0.65cm}Aplicando Ritmo Visual e Segmentação de Imagens, é
+possível representar um determinado evento de vídeo por um padrão de
+imagem 2D. Este método permite detectar transições como \textit{fades},
+cortes e \textit{dissolves}.
+
+\hspace*{0.65cm}Como exemplo, na Figura
+\ref{img_transicoes_detectadas}, um vídeo representado na forma de
+``timeline'', onde as suas transições foram detectadas, delimitadas
+e nomeadas.
+
+\begin{figure}[h|top]
+ \centering
+ \includegraphics[width=1\linewidth]{imagens/transicoes_detectadas.png}
+ \caption{Transições Detectadas (imagem ilustrativa).}
+ Fonte: Autor.
+ \label{img_transicoes_detectadas}
+\end{figure}
+
+\hspace*{0.65cm}Este trabalho tem como resultado esperado um
+produto final com funcionalidade próxima à Figura
+\ref{img_transicoes_detectadas}.
